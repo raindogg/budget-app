@@ -1,0 +1,17 @@
+<h1><%= @month.name %>, <%= @month.year %></h1>
+
+<h2>Add an expense:</h2>
+
+<%= form_tag '/entries', method: :post do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, nil, placeholder: "Name" %>
+
+  <%= label_tag :amount %>
+  <%= text_field_tag :amount, nil, placeholder: "Amount" %>
+
+  <%= label_tag :category %>
+  <%= collection_select :category, :category_id, Category.all, :id, :name %>
+
+  <%= submit_tag "Submit" %>
+
+<% end %>
