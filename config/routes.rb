@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   get '/entries/:id' => 'entries#show'
   patch '/entries/:id/edit' => 'entries#update'
   delete '/entries/:id' => 'entries#destroy'
-  
+
+  # Join table routes
+  post '/entry_category' => 'entry_categories#create'
 end
