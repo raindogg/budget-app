@@ -1,6 +1,14 @@
 class Month < ApplicationRecord
   has_many :entries
 
+  def all_expenses
+    sum = 0
+    entries.each do |entry|
+      sum += entry.amount
+    end
+    sum
+  end
+
   def all_savings
     sum = 0
     entries.each do |entry|

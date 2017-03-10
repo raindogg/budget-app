@@ -46,7 +46,7 @@
 <h3>Miscellaneous</h3>
 <p><%= number_to_currency(@month.all_misc) %></p>
 
-<h2>All Expenses:</h2>
+<h2>All Expenses: <%= number_to_currency(@month.all_expenses) %></h2>
 <ul>
   <% @month.entries.each do |entry| %>
   <li><b><%= entry.category.name if entry.category %></b>: <%= entry.name %>: <%= number_to_currency(entry.amount) %></li>
