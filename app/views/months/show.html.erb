@@ -17,3 +17,40 @@
   <%= submit_tag "Submit" %>
 
 <% end %>
+
+<h2>Totals:</h2>
+<h3>Savings</h3>
+<p><%= number_to_currency(@month.all_savings) %></p>
+
+<h3>Bills</h3>
+<p><%= number_to_currency(@month.all_bills) %></p>
+
+<h3>Groceries</h3>
+<p><%= number_to_currency(@month.all_groceries) %></p>
+
+<h3>Intoxicants</h3>
+<p><%= number_to_currency(@month.all_intoxicants) %></p>
+
+<h3>Transportation</h3>
+<p><%= number_to_currency(@month.all_transportation) %></p>
+
+<h3>Pets</h3>
+<p><%= number_to_currency(@month.all_pets) %></p>
+
+<h3>Restaurants</h3>
+<p><%= number_to_currency(@month.all_restaurants) %></p>
+
+<h3>Bars, Movies, Entertainment</h3>
+<p><%= number_to_currency(@month.all_bme) %></p>
+
+<h3>Miscellaneous</h3>
+<p><%= number_to_currency(@month.all_misc) %></p>
+
+<h2>All Expenses:</h2>
+<ul>
+  <% @month.entries.each do |entry| %>
+  <li><b><%= entry.category.name if entry.category %></b>: <%= entry.name %>: <%= number_to_currency(entry.amount) %></li>
+
+  <% end %>
+</ul>
+
