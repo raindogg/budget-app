@@ -47,10 +47,60 @@
 <p><%= number_to_currency(@month.all_misc) %></p>
 
 <h2>All Expenses: <%= number_to_currency(@month.all_expenses) %></h2>
-<ul>
-  <% @month.entries.each do |entry| %>
-  <li><b><%= entry.category.name if entry.category %></b>: <%= entry.name %>: <%= number_to_currency(entry.amount) %></li>
 
+<h2>Bills</h2>
+<ul>
+  <% @bills.each do |bill| %>
+    <li><b><%= bill.name  %></b>: <%= number_to_currency(bill.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Groceries</h2>
+<ul>
+  <% @groceries.each do |grocery| %>
+    <li><b><%= grocery.name  %></b>: <%= number_to_currency(grocery.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Intoxicants</h2>
+<ul>
+  <% @intox.each do |entry| %>
+    <li><b><%= entry.name  %></b>: <%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Transportation</h2>
+<ul>
+  <% @transport.each do |entry| %>
+    <li><b><%= entry.name  %></b>: <%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Pets</h2>
+<ul>
+  <% @pets.each do |entry| %>
+    <li><b><%= entry.name  %></b>: <%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Restaurants</h2>
+<ul>
+  <% @restaurants.each do |entry| %>
+    <li><b><%= entry.name  %></b>: <%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Bars, Movies, Entertainment</h2>
+<ul>
+  <% @bme.each do |entry| %>
+    <li><b><%= entry.name  %></b>: <%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
+
+<h2>Miscellaneous</h2>
+<ul>
+  <% @misc.each do |entry| %>
+    <li><b><%= entry.name  %></b>: <%= number_to_currency(entry.amount) %></li>
   <% end %>
 </ul>
 

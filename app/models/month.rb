@@ -1,7 +1,15 @@
 class Month < ApplicationRecord
   has_many :entries
 
-  def all_expenses
+  def filter(name)
+    filtered_entries = []
+    entries.each do |entry|
+      filtered_entries << entry if entry.category.name == name
+    end
+    filtered_entries
+  end
+
+  def total(entries)
     sum = 0
     entries.each do |entry|
       sum += entry.amount
@@ -9,75 +17,53 @@ class Month < ApplicationRecord
     sum
   end
 
+  def all_expenses
+    expenses = entries.all.reject { |entry| entry.category.name == 'Income' }
+    total(expenses)
+  end
+
   def all_savings
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Savings'
-    end
-    sum
+    savings = filter('Savings')
+    total(savings)
   end
 
   def all_bills
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Bills'
-    end
-    sum
+    bills = filter('Bills')
+    total(bills)
   end
 
   def all_groceries
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Groceries'
-    end
-    sum
+    groceries = filter('Groceries')
+    total(groceries)
   end
 
   def all_intoxicants
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Intoxicants'
-    end
-    sum
+    intoxicants = filter('Intoxicants')
+    total(intoxicants)
   end
 
   def all_transportation
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Transportation'
-    end
-    sum
+    transportation = filter('Transportation')
+    total(transportation)
   end
 
   def all_pets
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Pets'
-    end
-    sum
+    pets = filter('Pets')
+    total(pets)
   end
 
   def all_restaurants
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Restaurants'
-    end
-    sum
+    restaurants = filter('Restaurants')
+    total(restaurants)
   end
 
   def all_bme
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Bars, Movies, Entertainment'
-    end
-    sum
+    bme = filter('Bars, Movies, Entertainment')
+    total(bme)
   end
 
   def all_misc
-    sum = 0
-    entries.each do |entry|
-      sum += entry.amount if entry.category.name == 'Miscellaneous'
-    end
-    sum
+    misc = filter('Miscellaneous')
+    total(misc)
   end
 end
