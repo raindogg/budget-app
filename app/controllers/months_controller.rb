@@ -1,7 +1,10 @@
+require 'open-uri'
+
 class MonthsController < ApplicationController
   def index
     @current_month = Month.find_by current: true
     @prior_months = Month.where(current: :false)
+   
 
   end
 
@@ -21,6 +24,9 @@ class MonthsController < ApplicationController
     @restaurants = @month.filter('Restaurants')
     @bme = @month.filter('Bars, Movies, Entertainment')
     @misc = @month.filter('Miscellaneous')
+    @savings = @month.filter('Savings')
+    @income = @month.filter('Income')
+    @balance = @month.total(@income) - @month.all_expenses
   end
 
   def update

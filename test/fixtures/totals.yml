@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  savings: 
+  bills: 
+  groceries: 
+  intoxicants: 
+  transportation: 
+  misc: 
+  month_id: 1
+
+two:
+  savings: 
+  bills: 
+  groceries: 
+  intoxicants: 
+  transportation: 
+  misc: 
+  month_id: 1

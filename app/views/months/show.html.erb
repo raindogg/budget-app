@@ -1,4 +1,8 @@
 <h1><%= @month.name %>, <%= @month.year %></h1>
+<h2>Status </h2>
+<h3>Total income: <%= number_to_currency(@month.total(@income)) %></h3>
+<h3>Total expenses: <%= number_to_currency(@month.all_expenses) %></h3>
+<h3>Total remaining: <%= number_to_currency(@balance) %></h3>
 
 <h2>Add an expense:</h2>
 
@@ -20,38 +24,49 @@
 
 <h2>Totals:</h2>
 <h3>Savings</h3>
-<p><%= number_to_currency(@month.all_savings) %></p>
+<p><%= number_to_currency(@month.total(@savings)) %></p>
 
 <h3>Bills</h3>
-<p><%= number_to_currency(@month.all_bills) %></p>
+<p><%= number_to_currency(@month.total(@bills)) %></p>
 
 <h3>Groceries</h3>
-<p><%= number_to_currency(@month.all_groceries) %></p>
+<p><%= number_to_currency(@month.total(@groceries)) %></p>
 
 <h3>Intoxicants</h3>
-<p><%= number_to_currency(@month.all_intoxicants) %></p>
+<p><%= number_to_currency(@month.total(@intox)) %></p>
 
 <h3>Transportation</h3>
-<p><%= number_to_currency(@month.all_transportation) %></p>
+<p><%= number_to_currency(@month.total(@transport)) %></p>
 
 <h3>Pets</h3>
-<p><%= number_to_currency(@month.all_pets) %></p>
+<p><%= number_to_currency(@month.total(@pets)) %></p>
 
 <h3>Restaurants</h3>
-<p><%= number_to_currency(@month.all_restaurants) %></p>
+<p><%= number_to_currency(@month.total(@restaurants)) %></p>
 
 <h3>Bars, Movies, Entertainment</h3>
-<p><%= number_to_currency(@month.all_bme) %></p>
+<p><%= number_to_currency(@month.total(@bme)) %></p>
 
 <h3>Miscellaneous</h3>
-<p><%= number_to_currency(@month.all_misc) %></p>
+<p><%= number_to_currency(@month.total(@misc)) %></p>
 
-<h2>All Expenses: <%= number_to_currency(@month.all_expenses) %></h2>
+<h2>Savings</h2>
+<ul>
+  <% @savings.each do |entry| %>
+  <li><b><%= entry.id %> <%= entry.name %></b>:<%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
 
+<h2>Income</h2>
+<ul>
+  <% @income.each do |entry| %>
+  <li><b><%= entry.id %> <%= entry.name %></b>:<%= number_to_currency(entry.amount) %></li>
+  <% end %>
+</ul>
 <h2>Bills</h2>
 <ul>
   <% @bills.each do |bill| %>
-    <li><b><%= bill.name  %></b>: <%= number_to_currency(bill.amount) %></li>
+    <li><b><%= bill.id %> <%= bill.name  %></b>: <%= number_to_currency(bill.amount) %></li>
   <% end %>
 </ul>
 
