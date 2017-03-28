@@ -4,8 +4,6 @@ class MonthsController < ApplicationController
   def index
     @current_month = Month.find_by current: true
     @prior_months = Month.where(current: :false)
-   
-
   end
 
   def new
@@ -16,17 +14,19 @@ class MonthsController < ApplicationController
 
   def show
     @month = Month.find(params[:id])
-    @bills = @month.filter('Bills')
-    @groceries = @month.filter('Groceries')
-    @intox = @month.filter('Intoxicants')
-    @transport = @month.filter('Transportation')
-    @pets = @month.filter('Pets')
-    @restaurants = @month.filter('Restaurants')
-    @bme = @month.filter('Bars, Movies, Entertainment')
-    @misc = @month.filter('Miscellaneous')
-    @savings = @month.filter('Savings')
-    @income = @month.filter('Income')
-    @balance = @month.total(@income) - @month.all_expenses
+    entries = @month.filter
+    @bills = entries[0]
+    @income = entries[1]
+    @groceries = entries[2]
+    @intox = entries[3]
+    @transport = entries[4]
+    @pets = entries[5]
+    @restaurants = entries[6]
+    @bme = entries[7]
+    @misc = entries[8]
+    @savings = entries[9]
+    @expenses = @month.all_expenses(entries)
+    @balance = @month.total(@income) - @expenses
   end
 
   def update
