@@ -15,16 +15,16 @@ class MonthsController < ApplicationController
   def show
     @month = Month.find(params[:id])
     entries = @month.filter
-    @bills = entries[0]
-    @income = entries[1]
-    @groceries = entries[2]
-    @intox = entries[3]
-    @transport = entries[4]
-    @pets = entries[5]
-    @restaurants = entries[6]
-    @bme = entries[7]
-    @misc = entries[8]
-    @savings = entries[9]
+    @bills = entries['bills']
+    @income = entries['income']
+    @groceries = entries['groceries']
+    @intox = entries['intoxicants']
+    @transport = entries['transportation']
+    @pets = entries['pets']
+    @restaurants = entries['restaurants']
+    @bme = entries['entertainment']
+    @misc = entries['miscellaneous']
+    @savings = entries['savings']
     @expenses = @month.all_expenses(entries)
     @balance = @month.total(@income) - @expenses
   end
