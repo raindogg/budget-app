@@ -27,6 +27,18 @@ class MonthsController < ApplicationController
     @savings = entries['savings']
     @expenses = @month.all_expenses(entries)
     @balance = @month.total(@income) - @expenses
+    averages = Total.find_average
+    @average_bills = averages['bills'].round(2)
+    @average_income = averages['income'].round(2)
+    @average_groceries = averages['groceries'].round(2)
+    @average_intoxicants = averages['intoxicants'].round(2)
+    @average_transportation = averages['transportation'].round(2)
+    @average_pets = averages['pets'].round(2)
+    @average_restaurants = averages['restaurants'].round(2)
+    @average_entertainment = averages['entertainment'].round(2)
+    @average_miscellaneous = averages['miscellaneous'].round(2)
+    @average_savings = averages['savings'].round(2)
+
   end
 
   def update

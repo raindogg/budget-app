@@ -23,6 +23,7 @@
 <% end %>
 
 <h2>Income: <%= number_to_currency(@month.total(@income)) %></h2>
+<h3>Average income: <%= number_to_currency(@average_income) %></h3>
 <ul>
   <% @income.each do |entry| %>
   <li><b><%= entry[0] %></b>:<%= number_to_currency(entry[1]) %></li>
@@ -30,6 +31,7 @@
 </ul>
 
 <h2>Savings: <%= number_to_currency(@month.total(@savings)) %></h2>
+<h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
 <ul>
   <% @savings.each do |entry| %>
   <li><b><%= entry[0] %></b>:<%= number_to_currency(entry[1]) %></li>
@@ -38,6 +40,7 @@
 
 
 <h2>Bills: <%= number_to_currency(@month.total(@bills)) %></h2>
+<h3>Average bills: <%= number_to_currency(@average_bills) %></h3>
 <ul>
   <% @bills.each do |bill| %>
     <li><b><%= bill[0] %></b>: <%= number_to_currency(bill[1]) %></li>
@@ -45,6 +48,8 @@
 </ul>
 
 <h2>Groceries: <%= number_to_currency(@month.total(@groceries)) %></h2>
+<h3>Average groceries: <%= number_to_currency(@average_groceries) %></h3>
+
 <ul>
   <% @groceries.each do |grocery| %>
     <li><b><%= grocery[0]  %></b>: <%= number_to_currency(grocery[1]) %></li>
@@ -52,6 +57,8 @@
 </ul>
 
 <h2>Intoxicants: <%= number_to_currency(@month.total(@intox)) %></h2>
+<h3>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h3>
+
 <ul>
   <% @intox.each do |entry| %>
     <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
@@ -59,6 +66,8 @@
 </ul>
 
 <h2>Transportation: <%= number_to_currency(@month.total(@transport)) %></h2>
+<h3>Average transportation: <%= number_to_currency(@average_transportation) %></h3>
+
 <ul>
   <% @transport.each do |entry| %>
     <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
@@ -66,6 +75,8 @@
 </ul>
 
 <h2>Pets: <%= number_to_currency(@month.total(@pets)) %></h2>
+<h3>Average pets: <%= number_to_currency(@average_pets) %></h3>
+
 <ul>
   <% @pets.each do |entry| %>
     <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
@@ -73,6 +84,8 @@
 </ul>
 
 <h2>Restaurants: <%= number_to_currency(@month.total(@restaurants)) %></h2>
+<h3>Average restaurants: <%= number_to_currency(@average_restaurants) %></h3>
+
 <ul>
   <% @restaurants.each do |entry| %>
     <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
@@ -80,6 +93,8 @@
 </ul>
 
 <h2>Bars, Movies, Entertainment: <%= number_to_currency(@month.total(@bme)) %></h2>
+<h3>Average: <%= number_to_currency(@average_entertainment) %></h3>
+
 <ul>
   <% @bme.each do |entry| %>
     <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
@@ -87,6 +102,8 @@
 </ul>
 
 <h2>Miscellaneous: <%= number_to_currency(@month.total(@misc)) %></h2>
+<h3>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h3>
+
 <ul>
   <% @misc.each do |entry| %>
     <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
