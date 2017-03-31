@@ -1,0 +1,16 @@
+<% @content.each do |row| %>
+  <%= form_tag '/entries', method: :post do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name, row['Description'], placeholder: "Name" %>
+
+    <%= label_tag :amount %>
+    <%= text_field_tag :amount, row['Amount'], placeholder: "Amount" %>
+
+    <%= label_tag :category %>
+    <%= collection_select :category, :category_id, Category.all, :id, :name %>
+
+    <%= hidden_field_tag :month_id, @month %>
+
+    <%= submit_tag "Submit" %>
+    <% end %>
+<% end %>

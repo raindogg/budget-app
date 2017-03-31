@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  resources :entries do
+    collection { post :import }
+  end
   # Month routes
   get '/months' => 'months#index'
   get '/months/new' => 'months#new'
@@ -10,6 +13,7 @@ Rails.application.routes.draw do
 
   # Entry routes
   post '/entries' => 'entries#create'
+  get '/entries/new' => 'entries#new'
   get '/entries/:id' => 'entries#show'
   patch '/entries/:id/edit' => 'entries#update'
   delete '/entries/:id' => 'entries#destroy'

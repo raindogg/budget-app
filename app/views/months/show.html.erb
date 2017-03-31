@@ -22,6 +22,13 @@
 
 <% end %>
 
+<h2>Or, upload a CSV file:</h2>
+<%= form_tag import_entries_path, multipart: true, method: :post do %>
+  <%= file_field_tag :sheet %>
+  <%= hidden_field_tag :month_id, @month_id %>
+  <%= submit_tag 'Submit' %>
+<% end %>
+
 <h2>Income: <%= number_to_currency(@month.total(@income)) %></h2>
 <h3>Average income: <%= number_to_currency(@average_income) %></h3>
 <ul>

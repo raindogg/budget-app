@@ -1,4 +1,11 @@
+require 'csv'
+
 class EntriesController < ApplicationController
+  def import
+    @content = Entry.import(params[:sheet])
+    @month = params[:month_id]
+  end
+
   def create
     entry = Entry.create(name: params[:name],
                          amount: params[:amount],
