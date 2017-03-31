@@ -7,10 +7,24 @@
     <%= text_field_tag :amount, row['Amount'], placeholder: "Amount" %>
 
     <%= label_tag :category %>
-    <%= collection_select :category, :category_id, Category.all, :id, :name %>
+
+    <!-- <%= collection_select :category, :category_id, Category.all, :id, :name %> -->
+    <select name="category-select" class="categories">
+      <option value="1">Bills</option>
+      <option value="2">Income</option>
+      <option value="3">Groceries</option>
+      <option value="4">Intoxicants</option>
+      <option value="5">Transportation</option>
+      <option value="6">Pets</option>
+      <option value="7">Restaurants</option>
+      <option value="8">Bars, Movies, Entertainment</option>
+      <option value="9">Miscellaneous</option>
+      <option value="10">Income</option>
+    </select>
 
     <%= hidden_field_tag :month_id, @month %>
 
-    <%= submit_tag "Submit" %>
+    <%= submit_tag "Save" %>
     <% end %>
+    <br>
 <% end %>

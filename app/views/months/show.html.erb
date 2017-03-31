@@ -4,29 +4,33 @@
 <h3>Total expenses: <%= number_to_currency(@expenses) %></h3>  
 <h3>Total remaining: <%= number_to_currency(@balance) %></h3> 
 
-<h2>Add an expense:</h2>
+<% if @month.current %>
+<div>
+  <h2>Add an expense:</h2>
 
-<%= form_tag '/entries', method: :post do %>
-  <%= label_tag :name %>
-  <%= text_field_tag :name, nil, placeholder: "Name" %>
+  <%= form_tag '/entries', method: :post do %>
+    <%= label_tag :name %>
+    <%= text_field_tag :name, nil, placeholder: "Name" %>
 
-  <%= label_tag :amount %>
-  <%= text_field_tag :amount, nil, placeholder: "Amount" %>
+    <%= label_tag :amount %>
+    <%= text_field_tag :amount, nil, placeholder: "Amount" %>
 
-  <%= label_tag :category %>
-  <%= collection_select :category, :category_id, Category.all, :id, :name %>
+    <%= label_tag :category %>
+    <%= collection_select :category, :category_id, Category.all, :id, :name %>
 
-  <%= hidden_field_tag :month_id, @month.id %>
+    <%= hidden_field_tag :month_id, @month.id %>
 
-  <%= submit_tag "Submit" %>
+    <%= submit_tag "Submit" %>
 
-<% end %>
+  <% end %>
 
-<h2>Or, upload a CSV file:</h2>
-<%= form_tag import_entries_path, multipart: true, method: :post do %>
-  <%= file_field_tag :sheet %>
-  <%= hidden_field_tag :month_id, @month_id %>
-  <%= submit_tag 'Submit' %>
+  <h2>Or, upload a CSV file:</h2>
+  <%= form_tag import_entries_path, multipart: true, method: :post do %>
+    <%= file_field_tag :sheet %>
+    <%= hidden_field_tag :month_id, @month_id %>
+    <%= submit_tag 'Submit' %>
+  <% end %>
+</div>
 <% end %>
 
 <h2>Income: <%= number_to_currency(@month.total(@income)) %></h2>
