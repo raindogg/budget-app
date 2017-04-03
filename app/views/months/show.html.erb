@@ -27,7 +27,7 @@
   <h2>Or, upload a CSV file:</h2>
   <%= form_tag import_entries_path, multipart: true, method: :post do %>
     <%= file_field_tag :sheet %>
-    <%= hidden_field_tag :month_id, @month_id %>
+    <%= hidden_field_tag :month_id, @month.id %>
     <%= submit_tag 'Submit' %>
   <% end %>
 </div>

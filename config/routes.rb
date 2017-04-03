@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   # Entry routes
   post '/entries' => 'entries#create'
+  post '/entries_bulk' => 'entries#createbulk'
   get '/entries/new' => 'entries#new'
   get '/entries/:id' => 'entries#show'
   patch '/entries/:id/edit' => 'entries#update'

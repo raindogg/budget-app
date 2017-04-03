@@ -1,14 +1,17 @@
 <% @content.each do |row| %>
+<div class="entry-forms">
   <%= form_tag '/entries', method: :post do %>
     <%= label_tag :name %>
     <%= text_field_tag :name, row['Description'], placeholder: "Name" %>
 
     <%= label_tag :amount %>
-    <%= text_field_tag :amount, row['Amount'], placeholder: "Amount" %>
+    <% if row['Amount'].to_f < 0 %>
+      <%= text_field_tag :amount, (row['Amount'].to_f * -1), placeholder: "Amount" %>
+    <% else %>
+      <%= text_field_tag :amount, row['Amount'], placeholder: "Amount" %>
+    <% end %>
 
     <%= label_tag :category %>
-
-    <!-- <%= collection_select :category, :category_id, Category.all, :id, :name %> -->
     <select name="category-select" class="categories">
       <option value="1">Bills</option>
       <option value="2">Income</option>
@@ -19,12 +22,13 @@
       <option value="7">Restaurants</option>
       <option value="8">Bars, Movies, Entertainment</option>
       <option value="9">Miscellaneous</option>
-      <option value="10">Income</option>
+      <option value="10">Savings</option>
     </select>
 
-    <%= hidden_field_tag :month_id, @month %>
+    <%= hidden_field_tag :month_id, @month_id %>
 
-    <%= submit_tag "Save" %>
     <% end %>
+    <button class="entry-form-submit">Save</button>
+    </div>
     <br>
 <% end %>
