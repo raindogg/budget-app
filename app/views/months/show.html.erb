@@ -1,123 +1,172 @@
-<h1><%= @month.name %>, <%= @month.year %></h1>
-<h2>Status </h2>
-<h3>Total income: <%= number_to_currency(@month.total(@income)) %></h3> 
-<h3>Total expenses: <%= number_to_currency(@expenses) %></h3>  
-<h3>Total remaining: <%= number_to_currency(@balance) %></h3> 
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h1><%= @month.name %>, <%= @month.year %></h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Status:</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <h3>Total income: <%= number_to_currency(@month.total(@income)) %></h3> 
+    </div>
+    <div class="col-xs-4">
+      <h3>Total expenses: <%= number_to_currency(@expenses) %></h3> 
+    </div>
+    <div class="col-xs-4"> 
+      <h3>Total remaining: <%= number_to_currency(@balance) %></h3> 
+    </div>
+  </div>
+  <% if @month.current %>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Add an expense:</h2>
 
-<% if @month.current %>
-<div>
-  <h2>Add an expense:</h2>
+      <%= form_tag '/entries', method: :post do %>
+        <%= label_tag :name %>
+        <%= text_field_tag :name, nil, placeholder: "Name" %>
 
-  <%= form_tag '/entries', method: :post do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name, nil, placeholder: "Name" %>
+        <%= label_tag :amount %>
+        <%= text_field_tag :amount, nil, placeholder: "Amount" %>
 
-    <%= label_tag :amount %>
-    <%= text_field_tag :amount, nil, placeholder: "Amount" %>
+        <%= label_tag :category %>
+        <%= collection_select :category, :category_id, Category.all, :id, :name %>
 
-    <%= label_tag :category %>
-    <%= collection_select :category, :category_id, Category.all, :id, :name %>
+        <%= hidden_field_tag :month_id, @month.id %>
 
-    <%= hidden_field_tag :month_id, @month.id %>
+        <%= submit_tag "Submit" %>
 
-    <%= submit_tag "Submit" %>
-
-  <% end %>
-
-  <h2>Or, upload a CSV file:</h2>
-  <%= form_tag import_entries_path, multipart: true, method: :post do %>
-    <%= file_field_tag :sheet %>
-    <%= hidden_field_tag :month_id, @month.id %>
-    <%= submit_tag 'Submit' %>
-  <% end %>
+      <% end %>
+    </div>
+    <div class="col-xs-12">
+      <h2>Or, upload a CSV file:</h2>
+      <%= form_tag import_entries_path, multipart: true, method: :post do %>
+        <%= file_field_tag :sheet %>
+        <%= hidden_field_tag :month_id, @month.id %>
+        <%= submit_tag 'Submit' %>
+      <% end %>
+    </div>
+  </div>
+    <% end %>
 </div>
-<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-4">
+      <h2>Income: <%= number_to_currency(@month.total(@income)) %></h2>
+      <h3>Average income: <%= number_to_currency(@average_income) %></h3>
+      <ul>
+        <% @income.each do |entry| %>
+        <li><b><%= entry[0] %></b>:<%= number_to_currency(entry[1]) %></li>
+        <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-4">
+      <h2>Savings: <%= number_to_currency(@month.total(@savings)) %></h2>
+      <h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
+      <ul>
+        <% @savings.each do |entry| %>
+        <li><b><%= entry[0] %></b>:<%= number_to_currency(entry[1]) %></li>
+        <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-4">
+      <h2>Bills: <%= number_to_currency(@month.total(@bills)) %></h2>
+      <h3>Average bills: <%= number_to_currency(@average_bills) %></h3>
+      <ul>
+        <% @bills.each do |bill| %>
+          <li><b><%= bill[0] %></b>: <%= number_to_currency(bill[1]) %></li>
+          <%= link_to "Delete", "/entries/#{bill[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <h2>Groceries: <%= number_to_currency(@month.total(@groceries)) %></h2>
+      <h3>Average groceries: <%= number_to_currency(@average_groceries) %></h3>
 
-<h2>Income: <%= number_to_currency(@month.total(@income)) %></h2>
-<h3>Average income: <%= number_to_currency(@average_income) %></h3>
-<ul>
-  <% @income.each do |entry| %>
-  <li><b><%= entry[0] %></b>:<%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
+      <ul>
+        <% @groceries.each do |grocery| %>
+          <li><b><%= grocery[0]  %></b>: <%= number_to_currency(grocery[1]) %></li>
+          <%= link_to "Delete", "/entries/#{grocery[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-4">
+      <h2>Intoxicants: <%= number_to_currency(@month.total(@intox)) %></h2>
+      <h3>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h3>
 
-<h2>Savings: <%= number_to_currency(@month.total(@savings)) %></h2>
-<h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
-<ul>
-  <% @savings.each do |entry| %>
-  <li><b><%= entry[0] %></b>:<%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
+      <ul>
+        <% @intox.each do |entry| %>
+          <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
+          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-4">
+      <h2>Transportation: <%= number_to_currency(@month.total(@transport)) %></h2>
+      <h3>Average transportation: <%= number_to_currency(@average_transportation) %></h3>
 
+      <ul>
+        <% @transport.each do |entry| %>
+          <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
+          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-4">
+      <h2>Pets: <%= number_to_currency(@month.total(@pets)) %></h2>
+      <h3>Average pets: <%= number_to_currency(@average_pets) %></h3>
 
-<h2>Bills: <%= number_to_currency(@month.total(@bills)) %></h2>
-<h3>Average bills: <%= number_to_currency(@average_bills) %></h3>
-<ul>
-  <% @bills.each do |bill| %>
-    <li><b><%= bill[0] %></b>: <%= number_to_currency(bill[1]) %></li>
-  <% end %>
-</ul>
+      <ul>
+        <% @pets.each do |entry| %>
+          <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
+          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-4">
+      <h2>Restaurants: <%= number_to_currency(@month.total(@restaurants)) %></h2>
+      <h3>Average restaurants: <%= number_to_currency(@average_restaurants) %></h3>
 
-<h2>Groceries: <%= number_to_currency(@month.total(@groceries)) %></h2>
-<h3>Average groceries: <%= number_to_currency(@average_groceries) %></h3>
+      <ul>
+        <% @restaurants.each do |entry| %>
+          <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
+          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+    <div class="col-xs-4">
+      <h2>Bars, Movies, Entertainment: <%= number_to_currency(@month.total(@bme)) %></h2>
+      <h3>Average: <%= number_to_currency(@average_entertainment) %></h3>
 
-<ul>
-  <% @groceries.each do |grocery| %>
-    <li><b><%= grocery[0]  %></b>: <%= number_to_currency(grocery[1]) %></li>
-  <% end %>
-</ul>
+      <ul>
+        <% @bme.each do |entry| %>
+          <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
+          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Miscellaneous: <%= number_to_currency(@month.total(@misc)) %></h2>
+      <h3>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h3>
 
-<h2>Intoxicants: <%= number_to_currency(@month.total(@intox)) %></h2>
-<h3>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h3>
-
-<ul>
-  <% @intox.each do |entry| %>
-    <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
-
-<h2>Transportation: <%= number_to_currency(@month.total(@transport)) %></h2>
-<h3>Average transportation: <%= number_to_currency(@average_transportation) %></h3>
-
-<ul>
-  <% @transport.each do |entry| %>
-    <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
-
-<h2>Pets: <%= number_to_currency(@month.total(@pets)) %></h2>
-<h3>Average pets: <%= number_to_currency(@average_pets) %></h3>
-
-<ul>
-  <% @pets.each do |entry| %>
-    <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
-
-<h2>Restaurants: <%= number_to_currency(@month.total(@restaurants)) %></h2>
-<h3>Average restaurants: <%= number_to_currency(@average_restaurants) %></h3>
-
-<ul>
-  <% @restaurants.each do |entry| %>
-    <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
-
-<h2>Bars, Movies, Entertainment: <%= number_to_currency(@month.total(@bme)) %></h2>
-<h3>Average: <%= number_to_currency(@average_entertainment) %></h3>
-
-<ul>
-  <% @bme.each do |entry| %>
-    <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
-
-<h2>Miscellaneous: <%= number_to_currency(@month.total(@misc)) %></h2>
-<h3>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h3>
-
-<ul>
-  <% @misc.each do |entry| %>
-    <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
-  <% end %>
-</ul>
+      <ul>
+        <% @misc.each do |entry| %>
+          <li><b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %></li>
+          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
 

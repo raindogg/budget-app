@@ -15,10 +15,6 @@ Rails.application.routes.draw do
   post '/entries' => 'entries#create'
   post '/entries_bulk' => 'entries#createbulk'
   get '/entries/new' => 'entries#new'
-  get '/entries/:id' => 'entries#show'
   patch '/entries/:id/edit' => 'entries#update'
   delete '/entries/:id' => 'entries#destroy'
-
-  # Join table routes
-  post '/entry_category' => 'entry_categories#create'
 end
