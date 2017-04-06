@@ -4,27 +4,33 @@
       <h1><%= @month.name %>, <%= @month.year %></h1>
     </div>
   </div>
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Status:</h2>
+  <div class="holder">
+    <div class="row">
+      <div class="col-xs-12 text-center">
+        <h2>Status</h2>
+      </div>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-xs-4">
-      <h3>Total income: <%= number_to_currency(@month.total(@income)) %></h3> 
-    </div>
-    <div class="col-xs-4">
-      <h3>Total expenses: <%= number_to_currency(@expenses) %></h3> 
-    </div>
-    <div class="col-xs-4"> 
-      <h3>Total remaining: <%= number_to_currency(@balance) %></h3> 
+    <div class="row">
+      <div class="col-xs-4">
+        <h3>Total income: <%= number_to_currency(@month.total(@income)) %></h3> 
+      </div>
+      <div class="col-xs-4">
+        <h3>Total expenses: <%= number_to_currency(@expenses) %></h3> 
+      </div>
+      <div class="col-xs-4"> 
+        <h3>Total remaining: <%= number_to_currency(@balance) %></h3> 
+      </div>
     </div>
   </div>
   <% if @month.current %>
-  <div class="row">
+  <div class="row text-center">
     <div class="col-xs-12">
-      <h2>Add an expense:</h2>
-
+      <h2>Add an expense</h2>
+      <button class="show-form btn-success" data-name="manual">Manually</button>
+      <button class="show-form btn-info" data-name="csv">By uploading a CSV file</button>
+      <button class="hide-form btn-danger">Hide form</button>
+    </div>
+    <div class="col-xs-12 entry-manual entry-form">
       <%= form_tag '/entries', method: :post do %>
         <%= label_tag :name %>
         <%= text_field_tag :name, nil, placeholder: "Name" %>
@@ -41,12 +47,12 @@
 
       <% end %>
     </div>
-    <div class="col-xs-12">
-      <h2>Or, upload a CSV file:</h2>
+    <div class="col-xs-12 entry-csv entry-form">
       <%= form_tag import_entries_path, multipart: true, method: :post do %>
-        <%= file_field_tag :sheet %>
+        <label for="sheet" class="form-label" >Choose file</label>
+        <%= file_field_tag :sheet, class: "input-file" %>
         <%= hidden_field_tag :month_id, @month.id %>
-        <%= submit_tag 'Submit' %>
+        <%= submit_tag 'Submit', class: "btn-success" %>
       <% end %>
     </div>
   </div>
