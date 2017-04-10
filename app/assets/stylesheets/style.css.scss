@@ -37,4 +37,38 @@
   color: white;
 }
 
+.cat-row {
+  display: flex;
+  text-align: center;
+}
+
+.expense-category {
+  background-color: #abcfe8;
+  border-radius: 5px;
+  border: 3px solid black;
+  padding: 5px;
+  margin: 5px;
+  flex: 1;
+  transition: 
+    flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11);
+}
+
+.category-details {
+  display: none;
+  text-align: left;
+}
+
+.show-details {
+  text-align: center;
+  cursor: pointer;
+}
+.show-details:hover {
+  font-weight: bold;
+  color: #4606a0;
+}
+
+.entry-details {
+  margin-bottom: 5px;
+}
+
 
