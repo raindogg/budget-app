@@ -1,3 +1,11 @@
+.active {
+  display: inline-block;
+}
+
+.inactive {
+  display: none;
+}
+
 .holder {
   background-color: #0099ff;
   border-radius: 5px;
@@ -56,6 +64,8 @@
 .category-details {
   display: none;
   text-align: left;
+  transition:
+    opacity 0.7s;
 }
 
 .show-details {
@@ -65,6 +75,16 @@
 .show-details:hover {
   font-weight: bold;
   color: #4606a0;
+}
+
+.hide-details {
+  text-align: center;
+  cursor: pointer;
+  display: none;
+}
+.hide-details:hover {
+  font-weight:bold;
+  color: #c40707;
 }
 
 .entry-details {
