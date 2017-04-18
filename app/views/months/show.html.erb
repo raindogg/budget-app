@@ -22,6 +22,24 @@
       </div>
     </div>
   </div>
+    <div class="row text-center">
+      <%= form_tag "/months", method: :post do  %>
+        <%= hidden_field_tag :savings, @total_savings %>
+        <%= hidden_field_tag :bills, @total_bills %>
+        <%= hidden_field_tag :groceries, @total_groceries %>
+        <%= hidden_field_tag :intoxicants, @total_intox %>
+        <%= hidden_field_tag :transportation, @total_transport %>
+        <%= hidden_field_tag :pets, @total_pets %>
+        <%= hidden_field_tag :misc, @total_misc %>
+        <%= hidden_field_tag :income, @total_income %>
+        <%= hidden_field_tag :entertainment, @total_bme %>
+        <%= hidden_field_tag :restaurants, @total_restaurants %>
+        <%= hidden_field_tag :month_id, @month.id %>
+        
+        <%= submit_tag "End Month (archive expenses)", class: "btn-warning" %>
+      <% end %>
+
+    </div>
   <% if @month.current %>
   <div class="row text-center">
     <div class="col-xs-12">
@@ -61,7 +79,7 @@
 <div class="container">
   <div class="cat-row">
     <div class="col-xs-12 expense-category text-center">
-      <h2>Income: <%= number_to_currency(@month.total(@income)) %></h2>
+      <h2>Income: <%= number_to_currency(@total_income) %></h2>
       <h3>Average income: <%= number_to_currency(@average_income) %></h3>
       <div class="category-details">
         <div class="row">
@@ -80,7 +98,7 @@
   </div>
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
-      <h2>Savings: <%= number_to_currency(@month.total(@savings)) %></h2>
+      <h2>Savings: <%= number_to_currency(@total_savings) %></h2>
       <h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
       <div class="category-details">
         <div class="row">
@@ -96,7 +114,7 @@
       <span class="hide-details">Hide Details</span>
     </div>
     <div class="col-xs-4 expense-category">
-      <h2>Bills: <%= number_to_currency(@month.total(@bills)) %></h2>
+      <h2>Bills: <%= number_to_currency(@total_bills) %></h2>
       <h3>Average bills: <%= number_to_currency(@average_bills) %></h3>
       <div class="category-details">
         <div class="row">
@@ -112,7 +130,7 @@
       <span class="hide-details">Hide Details</span>
     </div>
     <div class="col-xs-4 expense-category">
-      <h2>Groceries: <%= number_to_currency(@month.total(@groceries)) %></h2>
+      <h2>Groceries: <%= number_to_currency(@total_groceries) %></h2>
       <h3>Average groceries: <%= number_to_currency(@average_groceries) %></h3>
       <div class="category-details">
         <div class="row">
@@ -130,7 +148,7 @@
   </div>
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
-      <h2>Intoxicants: <%= number_to_currency(@month.total(@intox)) %></h2>
+      <h2>Intoxicants: <%= number_to_currency(@total_intox) %></h2>
       <h3>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h3>
       <div class="category-details">
         <div class="row">
@@ -146,7 +164,7 @@
       <span class="hide-details">Hide Details</span>
     </div>
     <div class="col-xs-4 expense-category">
-      <h2>Transportation: <%= number_to_currency(@month.total(@transport)) %></h2>
+      <h2>Transportation: <%= number_to_currency(@total_transport) %></h2>
       <h3>Average transportation: <%= number_to_currency(@average_transportation) %></h3>
       <div class="category-details">
         <div class="row">
@@ -162,7 +180,7 @@
       <span class="hide-details">Hide Details</span>
     </div>
     <div class="col-xs-4 expense-category">
-      <h2>Pets: <%= number_to_currency(@month.total(@pets)) %></h2>
+      <h2>Pets: <%= number_to_currency(@total_pets) %></h2>
       <h3>Average pets: <%= number_to_currency(@average_pets) %></h3>
       <div class="category-details">
         <div class="row">
@@ -180,7 +198,7 @@
   </div>
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
-      <h2>Restaurants: <%= number_to_currency(@month.total(@restaurants)) %></h2>
+      <h2>Restaurants: <%= number_to_currency(@total_restaurants) %></h2>
       <h3>Average restaurants: <%= number_to_currency(@average_restaurants) %></h3>
       <div class="category-details">
         <div class="row">
@@ -196,7 +214,7 @@
       <span class="hide-details">Hide Details</span>
     </div>
     <div class="col-xs-4 expense-category">
-      <h2>Bars, Movies, Entertainment: <%= number_to_currency(@month.total(@bme)) %></h2>
+      <h2>Bars, Movies, Entertainment: <%= number_to_currency(@total_bme) %></h2>
       <h3>Average: <%= number_to_currency(@average_entertainment) %></h3>
       <div class="category-details">
         <div class="row">
@@ -212,7 +230,7 @@
       <span class="hide-details">Hide Details</span>
     </div>
     <div class="col-xs-4 expense-category">
-      <h2>Miscellaneous: <%= number_to_currency(@month.total(@misc)) %></h2>
+      <h2>Miscellaneous: <%= number_to_currency(@total_misc) %></h2>
       <h3>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h3>
       <div class="category-details">
         <div class="row">

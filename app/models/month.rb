@@ -44,4 +44,11 @@ class Month < ApplicationRecord
     end
     sum
   end
+
+  def next_month(month)
+    months = ['January', 'February', 'March', 'April', 'May', 'June',
+              'July', 'August', 'September', 'October', 'November', 'December']
+
+    month_index = months.index(month)
+  end
 end
