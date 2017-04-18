@@ -3,14 +3,6 @@ $(document).ready( function() {
   if(entry_forms.length > 0) {
     handleEntries(entry_forms);
   }
-})
-
-function handleEntries(entries) {
-  entries.forEach(function(entry) {
-    var submit = entry.querySelector('.entry-form-submit');
-    submit.addEventListener('click', addEntry);
-  })
-}
 
 function addEntry() {
   var entry = this.parentNode;
@@ -35,3 +27,21 @@ function addEntry() {
     }
   });
 }
+  function deleteEntry() {
+    var entryForm = this.parentNode.parentNode.parentNode;
+    entryForm.style = "opacity:0";
+    setTimeout(function() {
+      entryForm.style = "display:none";
+    }, 700);
+  }
+  
+  function handleEntries(entries) {
+    entries.forEach(function(entry) {
+      var submit = entry.querySelector('.entry-form-submit');
+      var close = entry.querySelector('.delete-entry');
+      submit.addEventListener('click', addEntry);
+      close.addEventListener('click', deleteEntry);
+    })
+  }
+
+})

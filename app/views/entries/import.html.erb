@@ -1,34 +1,51 @@
-<% @content.each do |row| %>
-<div class="entry-forms">
-  <%= form_tag '/entries', method: :post do %>
-    <%= label_tag :name %>
-    <%= text_field_tag :name, row['Description'], placeholder: "Name" %>
-
-    <%= label_tag :amount %>
-    <% if row['Amount'].to_f < 0 %>
-      <%= text_field_tag :amount, (row['Amount'].to_f * -1), placeholder: "Amount" %>
-    <% else %>
-      <%= text_field_tag :amount, row['Amount'], placeholder: "Amount" %>
-    <% end %>
-
-    <%= label_tag :category %>
-    <select name="category-select" class="categories">
-      <option value="1">Bills</option>
-      <option value="2">Income</option>
-      <option value="3">Groceries</option>
-      <option value="4">Intoxicants</option>
-      <option value="5">Transportation</option>
-      <option value="6">Pets</option>
-      <option value="7">Restaurants</option>
-      <option value="8">Bars, Movies, Entertainment</option>
-      <option value="9">Miscellaneous</option>
-      <option value="10">Savings</option>
-    </select>
-
-    <%= hidden_field_tag :month_id, @month_id %>
-
-    <% end %>
-    <button class="entry-form-submit">Save</button>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-center">
+      <h1>Add Entries</h1>
     </div>
-    <br>
-<% end %>
+  </div>
+  <div class="row">
+    <% @content.each do |row| %>
+      <div class="col-xs-12 text-center">
+        <div class="entry-forms holder form-inline">
+          <%= form_tag '/entries', method: :post do %>
+          <div class="form-group">
+            <%= label_tag :name %>
+            <%= text_field_tag :name, row['Description'], placeholder: "Name", class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :amount %>
+            <% if row['Amount'].to_f < 0 %>
+              <%= text_field_tag :amount, (row['Amount'].to_f * -1), placeholder: "Amount", class: "form-control" %>
+            <% else %>
+              <%= text_field_tag :amount, row['Amount'], placeholder: "Amount", class: "form-control" %>
+            <% end %>
+          </div>
+          <div class="form-group">
+            <%= label_tag :category %>
+            <select name="category-select" class="categories">
+              <option value="1">Bills</option>
+              <option value="2">Income</option>
+              <option value="3">Groceries</option>
+              <option value="4">Intoxicants</option>
+              <option value="5">Transportation</option>
+              <option value="6">Pets</option>
+              <option value="7">Restaurants</option>
+              <option value="8">Bars, Movies, Entertainment</option>
+              <option value="9">Miscellaneous</option>
+              <option value="10">Savings</option>
+            </select>
+
+            <%= hidden_field_tag :month_id, @month_id %>
+          </div>
+          <div class="form-group">
+            <% end %>
+            <span class="btn-success entry-button entry-form-submit">Save</span>
+            <span class="btn-danger entry-button delete-entry">Delete</span>
+          </div>
+        </div>
+            <br>
+    </div>
+        <% end %>
+  </div>
+</div>
