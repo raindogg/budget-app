@@ -1,11 +1,26 @@
-<h1>Current month: <%= link_to "#{@current_month.name}, #{@current_month.year}", "/months/#{@current_month.id}" %></h1>
-
-__________________________________
-
-
-<h2>Prior months:</h2>
-<% @prior_months.each do |month| %>
-  <h3><%= link_to "#{month.name}, #{month.year}", "/months/#{month.id}" %></h3>
-  <br>
-
-  <% end %>
+<div class="container text-center">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>Current month:</h1>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="holder">
+        <h1><%= link_to "#{@current_month.name}, #{@current_month.year}", "/months/#{@current_month.id}" %></h1>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Prior months:</h2>
+    </div>
+      <% @prior_months.each do |month| %>
+      <div class="col-xs-4">
+        <div class="holder">
+          <h3><%= link_to "#{month.name}, #{month.year}", "/months/#{month.id}" %></h3>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
