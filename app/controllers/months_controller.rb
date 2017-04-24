@@ -10,20 +10,29 @@ class MonthsController < ApplicationController
   end
 
   def create
+    current_month = Month.find(params[:month_id])
+    current_month.update(current: false)
+
+    current_month.name == 'December' ? year = (current_month.year.to_i + 1) : year = current_month.year
+
+    new_month = Month.create(name: current_month.next_month,
+                             year: year,
+                             current: true)
+
     Total.create(month_id: params[:month_id],
                  savings: params[:savings],
                  bills: params[:bills],
                  groceries: params[:groceries],
                  intoxicants: params[:intoxicants],
+                 transportation: params[:transportation],
                  pets: params[:pets],
                  misc: params[:misc],
                  income: params[:income],
                  entertainment: params[:entertainment],
                  restaurants: params[:restaurants])
 
-    Month.find(params[:month_id]).update(current: false)
 
-    
+    redirect_to "/months/#{new_month.id}"
   end
 
   def show
