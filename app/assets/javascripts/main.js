@@ -5,7 +5,7 @@ $(document).ready( function() {
   }
 
 function addEntry() {
-  var entry = this.parentNode;
+  var entry = this.parentNode.parentNode;
   var name = entry.querySelector('input#name').value;
   var amount = entry.querySelector('input#amount').value;
   var category = entry.querySelector('select.categories').value;
@@ -20,6 +20,10 @@ function addEntry() {
     success: function (result) {
       console.log("Success!");
       entry.innerHTML = "Saved!";
+      entry.parentNode.style = "opacity:0";
+      setTimeout(function() {
+        entry.parentNode.style = "display:none";
+      }, 1500);
 
     },
     error: function() {

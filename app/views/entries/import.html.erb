@@ -24,7 +24,7 @@
           <div class="form-group">
             <%= label_tag :category %>
             <select name="category-select" class="categories">
-              <option value="1">Bills</option>
+              <option value="1" selected='selected'>Bills</option>
               <option value="2">Income</option>
               <option value="3">Groceries</option>
               <option value="4">Intoxicants</option>
@@ -47,5 +47,8 @@
             <br>
     </div>
         <% end %>
+  </div>
+  <div class='row text-center'>
+    <button class="return-button btn btn-primary"><a class='return-link' href="/months/<%= @month_id %>">Return</a></button>
   </div>
 </div>
