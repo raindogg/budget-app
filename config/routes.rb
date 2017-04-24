@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     collection { post :import }
   end
   # Month routes
+  get '/' => 'months#index'
   get '/months' => 'months#index'
-  get '/months/new' => 'months#new'
+  post '/months/new' => 'months#new'
   post '/months' => 'months#create'
   get '/months/:id' => 'months#show'
   patch '/months/:id/edit' => 'months#update'

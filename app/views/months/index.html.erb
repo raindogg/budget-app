@@ -1,6 +1,10 @@
 <div class="container text-center">
   <div class="row">
     <div class="col-xs-12">
+      <% if @prior_months.length < 1 || !@current_month %>
+      <h1>Looks like you don't have any expenses to display.</h1>
+      <%= link_to "Start budgeting!", "/months/new", method: :post %>
+      <% else %>
       <h1>Current month:</h1>
     </div>
   </div>
@@ -23,4 +27,5 @@
       </div>
       <% end %>
     </div>
+    <% end %>
   </div>

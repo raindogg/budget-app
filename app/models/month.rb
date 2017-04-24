@@ -57,5 +57,4 @@ class Month < ApplicationRecord
       return months[month_index + 1]
     end
   end
-
 end
