@@ -12,8 +12,19 @@
   border: 3px solid black;
   padding: 5px;
   margin: 5px;
+  color: white;
 }
 
+.holder a {
+  color: white;
+}
+
+.holder a:hover {
+  color: #d6083f;
+}
+.holder select {
+  color: black;
+}
 .entry-form, .hide-form {
   display: none;
 }
@@ -100,10 +111,6 @@
 .entry-forms {
   transition:
     opacity 0.7s;
-}
-
-.holder a {
-  color: #1a8c29;
 }
 
 .return-link {

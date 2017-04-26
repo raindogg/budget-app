@@ -7,19 +7,26 @@ class MonthsController < ApplicationController
   end
 
   def new
-    months = { 1 => "January", 2 => "February", 3 => "March", 4 => "April", 5 => "May", 6 => "June",
-              7 => "July", 8 => "August", 9 => "September", 10 => "October", 11 => "November", 12 => "December" }
     date = Time.new
 
-    month = months[date.month]
-    year = date.year
-
-    new_month = Month.create(name: month, year: year, current: true)
-
-    redirect_to "/months/#{new_month.id}"
+    @current_month = date.month
+    @year = date.year
+    @year_range = []
+    
+    for i in 2000..2035
+      @year_range << [i, i]
+    end
   end
 
   def create
+    month = Month.create(name: params[:name],
+                         year: params[:year],
+                         current: params[:current])
+
+    redirect_to "/months/#{month.id}"
+  end
+
+  def archive
     current_month = Month.find(params[:month_id])
     current_month.update(current: false)
 

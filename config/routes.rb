@@ -6,8 +6,9 @@ Rails.application.routes.draw do
   # Month routes
   get '/' => 'months#index'
   get '/months' => 'months#index'
-  post '/months/new' => 'months#new'
-  post '/months' => 'months#create'
+  get '/months/new' => 'months#new'
+  post '/months/new' => 'months#create'
+  post '/months' => 'months#archive'
   get '/months/:id' => 'months#show'
   patch '/months/:id/edit' => 'months#update'
   delete '/months/:id' => 'months#destroy'
