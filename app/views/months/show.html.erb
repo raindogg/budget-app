@@ -42,7 +42,6 @@
 
     </div>
     <% end %>
-  <% if @month.current %>
   <div class="row text-center">
     <div class="col-xs-12">
       <h2>Add an expense</h2>
@@ -65,7 +64,6 @@
 
         <%= submit_tag "Submit" %>
 
-      <% end %>
     </div>
     <div class="col-xs-12 entry-csv entry-form">
       <%= form_tag import_entries_path, multipart: true, method: :post do %>
