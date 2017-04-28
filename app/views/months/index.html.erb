@@ -11,7 +11,11 @@
   <div class="row">
     <div class="col-xs-12">
       <div class="holder">
-        <h1><%= link_to "#{@current_month.name}, #{@current_month.year}", "/months/#{@current_month.id}" %></h1>
+        <% if @current_month %>
+          <h1><%= link_to "#{@current_month.name}, #{@current_month.year}", "/months/#{@current_month.id}" %></h1>
+        <% else %>
+          <h1>No current month. <%= link_to "Start one?", "/months/new"  %></h1>
+        <% end %>
       </div>
     </div>
   </div>
