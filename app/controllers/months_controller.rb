@@ -54,6 +54,8 @@ class MonthsController < ApplicationController
 
   def show
     @month = Month.find(params[:id])
+
+    @total = Total.find_by month_id: @month.id
     entries = @month.filter
 
     @bills = entries['bills']

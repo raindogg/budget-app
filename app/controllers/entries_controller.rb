@@ -10,7 +10,7 @@ class EntriesController < ApplicationController
     Entry.create(name: params[:name],
                  amount: params[:amount],
                  month_id: params[:month_id],
-                 category_id: params[:category_id][:category])
+                 category_id: params[:category][:category_id])
 
     redirect_to "/months/#{params[:month_id]}"
   end

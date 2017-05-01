@@ -22,8 +22,8 @@
       </div>
     </div>
   </div>
-  <% if @month.current %>
     <div class="row text-center">
+  <% if @month.current %>
       <%= form_tag "/months", method: :post do  %>
         <%= hidden_field_tag :savings, @total_savings %>
         <%= hidden_field_tag :bills, @total_bills %>
@@ -40,8 +40,24 @@
         <%= submit_tag "End Month (archive expenses)", class: "btn-warning" %>
       <% end %>
 
-    </div>
     <% end %>
+    <% if !@month.current && !@total %>
+      <%= form_tag "/totals", method: :post do %>
+        <%= hidden_field_tag :savings, @total_savings %>
+        <%= hidden_field_tag :bills, @total_bills %>
+        <%= hidden_field_tag :groceries, @total_groceries %>
+        <%= hidden_field_tag :intoxicants, @total_intox %>
+        <%= hidden_field_tag :transportation, @total_transport %>
+        <%= hidden_field_tag :pets, @total_pets %>
+        <%= hidden_field_tag :misc, @total_misc %>
+        <%= hidden_field_tag :income, @total_income %>
+        <%= hidden_field_tag :entertainment, @total_bme %>
+        <%= hidden_field_tag :restaurants, @total_restaurants %>
+        <%= hidden_field_tag :month_id, @month.id %>
+        <%= submit_tag "Archive Totals", class: "btn-info" %>
+      <% end %>
+    <% end %>
+    </div>
   <div class="row text-center">
     <div class="col-xs-12">
       <h2>Add an expense</h2>

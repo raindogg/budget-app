@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   get '/entries/new' => 'entries#new'
   patch '/entries/:id/edit' => 'entries#update'
   delete '/entries/:id' => 'entries#destroy'
+
+  # Total routes
+  post '/totals' => 'totals#create'
 end

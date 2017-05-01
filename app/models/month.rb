@@ -38,6 +38,7 @@ class Month < ApplicationRecord
 
   def all_expenses(everything)
     everything.delete('income')
+    everything.delete('savings')
     sum = 0
     everything.each_value do |entry|
       sum += total(entry)
