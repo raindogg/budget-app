@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <% if @goals.length > 0 %>
+      <h1>Current goals:</h1>
+    </div>
+      <% @goals.each do |goal| %>
+        <div class="col-xs-6">
+          <div class="holder">
+            <h2><%= goal.category.name %>:</h2>
+            <h3><%= goal.amount %></h3>
+          </div>
+        </div>
+      <% end %>
+      <% else %>
+        <h1>No goals set.</h1>
+        <h2><%= link_to "Set some?", "/goals/new" %></h2>
+      </div>
+      <% end %>
+  </div>
+</div>

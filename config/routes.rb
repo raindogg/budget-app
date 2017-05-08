@@ -22,4 +22,10 @@ Rails.application.routes.draw do
 
   # Total routes
   post '/totals' => 'totals#create'
+
+  # Goal routes
+  get '/goals' => 'goals#index'
+  get '/goals/new' => 'goals#new'
+  post '/goals/new' => 'goals#create'
+  patch 'goals/edit' => 'goals#update'
 end

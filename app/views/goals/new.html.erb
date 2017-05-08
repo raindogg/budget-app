@@ -1,0 +1,51 @@
+<div class='container text-center'>
+  <div class="row">
+    <div class="col-xs-12">
+      <h1>What is your target amount for these categories?</h1>
+      <p>*Placeholder values taken from the averages for each category.</p>
+      <%= form_tag "/goals/new", method: :post do %>
+        <div class="form-group">
+        <%= label_tag :bills %>
+        <%= text_field_tag :bills, @average_bills %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :income %>
+        <%= text_field_tag :income, @average_income %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :groceries %>
+        <%= text_field_tag :groceries, @average_groceries %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :intoxicants %>
+        <%= text_field_tag :intox, @average_intoxicants %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :transportation %>
+        <%= text_field_tag :transportation, @average_transportation %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :pets %>
+        <%= text_field_tag :pets, @average_pets %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :restaurants %>
+        <%= text_field_tag :restaurants, @average_restaurants %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :entertainment %>
+        <%= text_field_tag :entertainment, @average_entertainment %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :miscellaneous %>
+        <%= text_field_tag :misc, @average_miscellaneous %>
+        </div>
+        <div class="form-group">
+        <%= label_tag :savings %>
+        <%= text_field_tag :savings, @average_savings %>
+        </div>
+        <%= submit_tag "Create goals", class: "btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>
