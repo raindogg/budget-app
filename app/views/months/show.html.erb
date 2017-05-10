@@ -92,48 +92,85 @@
     </div>
   </div>
 </div>
+
 <div class="container">
+
   <div class="cat-row">
     <div class="col-xs-12 expense-category text-center">
       <h2>Income: <%= number_to_currency(@total_income) %></h2>
-      <h3>Average income: <%= number_to_currency(@average_income) %></h3>
-      <div class="category-details">
-        <div class="row">
-          <% @income.each do |entry| %>
-          <div class="col-xs-4 entry-details">
-          <b><%= entry[0] %></b>: <%= number_to_currency(entry[1]) %>
-          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
-          </div>
-          <% end %>
-        </div>
-      </div>
       <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
-      
     </div>
   </div>
+
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
       <h2>Savings: <%= number_to_currency(@total_savings) %></h2>
-      <h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
-      <div class="category-details">
-        <div class="row">
-          <% @savings.each do |entry| %>
-          <div class="col-xs-4 entry-details">
-          <b><%= entry[0] %></b>: <%= number_to_currency(entry[1]) %>
-          <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
-          </div>
-          <% end %>
-        </div>
-      </div>
       <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
     </div>
+
     <div class="col-xs-4 expense-category">
       <h2>Bills: <%= number_to_currency(@total_bills) %></h2>
-      <h3>Average bills: <%= number_to_currency(@average_bills) %></h3>
-      <div class="category-details">
-        <div class="row">
+      <span class="show-details">Show Details</span>
+    </div>
+
+    <div class="col-xs-4 expense-category">
+      <h2>Groceries: <%= number_to_currency(@total_groceries) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+  </div>
+
+  <div class="cat-row">
+    <div class="col-xs-4 expense-category">
+      <h2>Intoxicants: <%= number_to_currency(@total_intox) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+
+    <div class="col-xs-4 expense-category">
+      <h2>Transportation: <%= number_to_currency(@total_transport) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+
+    <div class="col-xs-4 expense-category">
+      <h2>Pets: <%= number_to_currency(@total_pets) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+
+  </div>
+  <div class="cat-row">
+    <div class="col-xs-4 expense-category">
+      <h2>Restaurants: <%= number_to_currency(@total_restaurants) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+
+    <div class="col-xs-4 expense-category">
+      <h2>Bars, Movies, Entertainment: <%= number_to_currency(@total_bme) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+
+    <div class="col-xs-4 expense-category">
+      <h2>Miscellaneous: <%= number_to_currency(@total_misc) %></h2>
+      <span class="show-details">Show Details</span>
+    </div>
+  </div>
+</div>
+
+<div id="modal">
+  <div class="catModal" id="bills">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Bills: <%= number_to_currency(@total_bills) %></h2>
+          <h3>Bills goal: <%= number_to_currency(@bills_goal) %></h3>
+          <% if @bills_goal > @total_bills %>
+            <h4 class="under-budget"><%= number_to_currency(@bills_goal - @total_bills) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_bills - @bills_goal) %> over.</h4>
+          <% end %>
+          <h5>Average Bills: <%= number_to_currency(@average_bills) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @bills.each do |bill| %>
             <div class="col-xs-4 entry-details">
             <b><%= bill[0] %></b>: <%= number_to_currency(bill[1]) %>
@@ -141,15 +178,61 @@
             </div>
           <% end %>
         </div>
-      </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
-    </div>
-    <div class="col-xs-4 expense-category">
-      <h2>Groceries: <%= number_to_currency(@total_groceries) %></h2>
-      <h3>Average groceries: <%= number_to_currency(@average_groceries) %></h3>
-      <div class="category-details">
         <div class="row">
+          <div class="col-xs-12 text-center">
+            <span class="hide-details">Hide Details</span>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="catModal" id="income">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Income: <%= number_to_currency(@total_income) %></h2>
+          <h3>Income goal: <%= number_to_currency(@income_goal) %></h3>
+          <% if @income_goal > @total_income %>
+            <h4 class="under-budget"><%= number_to_currency(@income_goal - @total_income) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_income - @income_goal) %> over.</h4>
+          <% end %>
+          <h5>Average income: <%= number_to_currency(@average_income) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
+          <% @income.each do |entry| %>
+            <div class="col-xs-4 entry-details">
+            <b><%= entry[0] %></b>: <%= number_to_currency(entry[1]) %>
+            <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide Details</span>
+        </div>
+    </div>
+  </div>
+
+  <div class="catModal" id="groceries">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Groceries: <%= number_to_currency(@total_groceries) %></h2>
+          <h3>Groceries goal: <%= number_to_currency(@groceries_goal) %></h3>
+          <% if @groceries_goal > @total_groceries %>
+            <h4 class="under-budget"><%= number_to_currency(@groceries_goal - @total_groceries) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_groceries - @groceries_goal) %> over.</h4>
+          <% end %>
+          <h5>Average groceries: <%= number_to_currency(@average_groceries) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @groceries.each do |grocery| %>
             <div class="col-xs-4 entry-details">
             <b><%= grocery[0]  %></b>: <%= number_to_currency(grocery[1]) %>
@@ -158,16 +241,31 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="cat-row">
-    <div class="col-xs-4 expense-category">
-      <h2>Intoxicants: <%= number_to_currency(@total_intox) %></h2>
-      <h3>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h3>
-      <div class="category-details">
-        <div class="row">
+
+
+  <div class="catModal" id="intox">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Intoxicants: <%= number_to_currency(@total_intox) %></h2>
+          <h3>Intoxicants goal: <%= number_to_currency(@intox_goal) %></h3>
+          <% if @intox_goal > @total_intox %>
+            <h4 class="under-budget"><%= number_to_currency(@intox_goal - @total_intox) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_intox - @intox_goal) %> over.</h4>
+          <% end %>
+          <h5>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @intox.each do |entry| %>
             <div class="col-xs-4 entry-details">
             <b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %>
@@ -176,14 +274,30 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-4 expense-category">
-      <h2>Transportation: <%= number_to_currency(@total_transport) %></h2>
-      <h3>Average transportation: <%= number_to_currency(@average_transportation) %></h3>
-      <div class="category-details">
-        <div class="row">
+  </div>
+
+  <div class="catModal" id="transport">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Transportation: <%= number_to_currency(@total_transport) %></h2>
+          <h3>Transportation goal: <%= number_to_currency(@transport_goal) %></h3>
+          <% if @transport_goal > @total_transport %>
+            <h4 class="under-budget"><%= number_to_currency(@transport_goal - @total_transport) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_transport - @transport_goal) %> over.</h4>
+          <% end %>
+          <h5>Average transportation: <%= number_to_currency(@average_transportation) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @transport.each do |entry| %>
             <div class="col-xs-4 entry-details">
             <b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %>
@@ -192,14 +306,30 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-4 expense-category">
-      <h2>Pets: <%= number_to_currency(@total_pets) %></h2>
-      <h3>Average pets: <%= number_to_currency(@average_pets) %></h3>
-      <div class="category-details">
-        <div class="row">
+  </div>
+
+  <div class="catModal" id="pets">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Pets: <%= number_to_currency(@total_pets) %></h2>
+          <h3>Pets goal: <%= number_to_currency(@pets_goal) %></h3>
+          <% if @pets_goal > @total_pets %>
+            <h4 class="under-budget"><%= number_to_currency(@pets_goal - @total_pets) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_pets - @pets_goal) %> over.</h4>
+          <% end %>
+          <h5>Average pets: <%= number_to_currency(@average_pets) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @pets.each do |entry| %>
             <div class="col-xs-4 entry-details">
             <b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %>
@@ -208,16 +338,30 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12 text_center">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="cat-row">
-    <div class="col-xs-4 expense-category">
-      <h2>Restaurants: <%= number_to_currency(@total_restaurants) %></h2>
-      <h3>Average restaurants: <%= number_to_currency(@average_restaurants) %></h3>
-      <div class="category-details">
-        <div class="row">
+
+  <div class="catModal" id="restaurants">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Restaurants: <%= number_to_currency(@total_restaurants) %></h2>
+          <h3>Restaurants goal: <%= number_to_currency(@restaurants_goal) %></h3>
+          <% if @restaurants_goal > @total_restaurants %>
+            <h4 class="under-budget"><%= number_to_currency(@restaurants_goal - @total_restaurants) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_restaurants - @restaurants_goal) %> over.</h4>
+          <% end %>
+          <h5>Average restaurants: <%= number_to_currency(@average_restaurants) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @restaurants.each do |entry| %>
             <div class="col-xs-4 entry-details">
             <b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %>
@@ -226,14 +370,30 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-4 expense-category">
-      <h2>Bars, Movies, Entertainment: <%= number_to_currency(@total_bme) %></h2>
-      <h3>Average: <%= number_to_currency(@average_entertainment) %></h3>
-      <div class="category-details">
-        <div class="row">
+  </div>
+
+  <div class="catModal" id="entertainment">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Bars, Movies, Entertainment: <%= number_to_currency(@total_bme) %></h2>
+          <h3>Bars, movies, entertainment goal: <%= number_to_currency(@bme_goal) %></h3>
+          <% if @bme_goal > @total_bme %>
+            <h4 class="under-budget"><%= number_to_currency(@bme_goal - @total_bme) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_bme - @bme_goal) %> over.</h4>
+          <% end %>
+          <h5>Average: <%= number_to_currency(@average_entertainment) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @bme.each do |entry| %>
             <div class="col-xs-4 entry-details">
             <b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %>
@@ -242,14 +402,30 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
     </div>
-    <div class="col-xs-4 expense-category">
-      <h2>Miscellaneous: <%= number_to_currency(@total_misc) %></h2>
-      <h3>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h3>
-      <div class="category-details">
-        <div class="row">
+  </div>
+
+  <div class="catModal" id="misc">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Miscellaneous: <%= number_to_currency(@total_misc) %></h2>
+          <h3>Miscellaneous goal: <%= number_to_currency(@misc_goal) %></h3>
+          <% if @misc_goal > @total_misc %>
+            <h4 class="under-budget"><%= number_to_currency(@misc_goal - @total_misc) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_misc - @misc_goal) %> over.</h4>
+          <% end %>
+          <h5>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h5>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
           <% @misc.each do |entry| %>
             <div class="col-xs-4 entry-details">
             <b><%= entry[0]  %></b>: <%= number_to_currency(entry[1]) %>
@@ -258,8 +434,43 @@
           <% end %>
         </div>
       </div>
-      <span class="show-details">Show Details</span>
-      <span class="hide-details">Hide Details</span>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide details</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="catModal" id="savings">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Savings: <%= number_to_currency(@total_savings) %></h2>
+          <h3>Savings goal: <%= number_to_currency(@savings_goal) %></h3>
+          <% if @savings_goal > @total_savings %>
+            <h4 class="under-budget"><%= number_to_currency(@savings_goal - @total_savings) %> under!</h4>
+          <% else %>
+            <h4 class="over-budget"><%= number_to_currency(@total_savings - @savings_goal) %> over.</h4>
+          <% end %>
+          <h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="category-details">
+          <% @savings.each do |entry| %>
+            <div class="col-xs-4 entry-details">
+            <b><%= entry[0] %></b>: <%= number_to_currency(entry[1]) %>
+            <%= link_to "Delete", "/entries/#{entry[2]}", method: :delete %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <span class="hide-details">Hide Details</span>
+        </div>
+      </div>
     </div>
   </div>
 </div>
