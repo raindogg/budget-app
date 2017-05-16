@@ -5,6 +5,7 @@ $(document).ready( function() {
     var input = document.querySelector('.input-file');
     var detailButtons = document.querySelectorAll('.show-details');
     var hideDetailsButtons = document.querySelectorAll('.hide-details');
+    var modal = document.querySelector("#modal");
 
     var location = window.location.pathname;
     if(location.match(/months\/\d/g) != null){
@@ -49,19 +50,10 @@ $(document).ready( function() {
   }
 
   function showDetails() {
-    var catRow = this.parentElement;
-    var otherCats = document.querySelectorAll('.expense-category');
-    var hideButton = catRow.querySelector('.hide-details');
-    var otherHideButtons = document.querySelectorAll('.hide-details');
-    
-    otherCats.forEach(function(box) {
-      box.style = "flex:1";
-      box.querySelector('.category-details').style = "display:none";
-    })
-    catRow.querySelector('.category-details').style = "display:inline-block";
-    catRow.style = "flex:5";
-    this.style = "display:none";
-    hideButton.style = "display:inline-block";
+    modal.style = "display:block";
+    var catModal = document.querySelector("#modal-" + this.dataset.cat);
+    console.log(catModal);
+    catModal.style = "display:block";
   }
 
   function hideDetails() {

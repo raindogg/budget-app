@@ -74,7 +74,6 @@
 }
 
 .category-details {
-  display: none;
   text-align: left;
   transition:
     opacity 0.7s;
@@ -92,7 +91,6 @@
 .hide-details {
   text-align: center;
   cursor: pointer;
-  display: none;
 }
 .hide-details:hover {
   font-weight:bold;
@@ -118,6 +116,22 @@
   text-decoration: none;
 }
 
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
 
+.catModal {
+  display: none;
+  background-color: white;
+  color: black;
+  border: solid black 5px;
+}
 
 

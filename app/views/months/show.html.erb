@@ -98,64 +98,64 @@
   <div class="cat-row">
     <div class="col-xs-12 expense-category text-center">
       <h2>Income: <%= number_to_currency(@total_income) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="income">Show Details</span>
     </div>
   </div>
 
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
       <h2>Savings: <%= number_to_currency(@total_savings) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="savings">Show Details</span>
     </div>
 
     <div class="col-xs-4 expense-category">
       <h2>Bills: <%= number_to_currency(@total_bills) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="bills">Show Details</span>
     </div>
 
     <div class="col-xs-4 expense-category">
       <h2>Groceries: <%= number_to_currency(@total_groceries) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="groceries">Show Details</span>
     </div>
   </div>
 
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
       <h2>Intoxicants: <%= number_to_currency(@total_intox) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="intox">Show Details</span>
     </div>
 
     <div class="col-xs-4 expense-category">
       <h2>Transportation: <%= number_to_currency(@total_transport) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="transport">Show Details</span>
     </div>
 
     <div class="col-xs-4 expense-category">
       <h2>Pets: <%= number_to_currency(@total_pets) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="pets">Show Details</span>
     </div>
 
   </div>
   <div class="cat-row">
     <div class="col-xs-4 expense-category">
       <h2>Restaurants: <%= number_to_currency(@total_restaurants) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="restaurants">Show Details</span>
     </div>
 
     <div class="col-xs-4 expense-category">
       <h2>Bars, Movies, Entertainment: <%= number_to_currency(@total_bme) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="entertainment">Show Details</span>
     </div>
 
     <div class="col-xs-4 expense-category">
       <h2>Miscellaneous: <%= number_to_currency(@total_misc) %></h2>
-      <span class="show-details">Show Details</span>
+      <span class="show-details" data-cat="misc">Show Details</span>
     </div>
   </div>
 </div>
 
 <div id="modal">
-  <div class="catModal" id="bills">
+  <div class="catModal" id="modal-bills">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -185,8 +185,9 @@
       </div>
     </div>
   </div>
+  </div>
 
-  <div class="catModal" id="income">
+  <div class="catModal" id="modal-income">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -216,8 +217,9 @@
         </div>
     </div>
   </div>
+  </div>
 
-  <div class="catModal" id="groceries">
+  <div class="catModal" id="modal-groceries">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -250,7 +252,8 @@
   </div>
 
 
-  <div class="catModal" id="intox">
+
+  <div class="catModal" id="modal-intox">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -282,7 +285,9 @@
     </div>
   </div>
 
-  <div class="catModal" id="transport">
+  
+
+  <div class="catModal" id="modal-transport">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -314,7 +319,7 @@
     </div>
   </div>
 
-  <div class="catModal" id="pets">
+  <div class="catModal" id="modal-pets">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -346,7 +351,7 @@
     </div>
   </div>
 
-  <div class="catModal" id="restaurants">
+  <div class="catModal" id="modal-restaurants">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -378,7 +383,7 @@
     </div>
   </div>
 
-  <div class="catModal" id="entertainment">
+  <div class="catModal" id="modal-entertainment">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -410,7 +415,7 @@
     </div>
   </div>
 
-  <div class="catModal" id="misc">
+  <div class="catModal" id="modal-misc">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
@@ -442,7 +447,7 @@
     </div>
   </div>
 
-  <div class="catModal" id="savings">
+  <div class="catModal" id="modal-savings">
     <div class="container">
       <div class="row">
         <div class="col-xs-12">
