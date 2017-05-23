@@ -52,17 +52,13 @@ $(document).ready( function() {
   function showDetails() {
     modal.style = "display:block";
     var catModal = document.querySelector("#modal-" + this.dataset.cat);
-    console.log(catModal);
     catModal.style = "display:block";
   }
 
   function hideDetails() {
-    var catRow = this.parentElement;
-    var showButton = catRow.querySelector('.show-details');
-    catRow.style = "flex:1";
-    showButton.style = "display:inline-block";
-    catRow.querySelector('.category-details').style = "display:none";
-    this.style = "display:none";
+    var catModal = this.parentElement.parentElement;
+    catModal.style = "display:none";
+    modal.style = "display:none";
   }
 
   function inputStyle() {
