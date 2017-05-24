@@ -162,6 +162,35 @@
   color: red;
 }
 
+.goal-button {
+  cursor: pointer;
+}
+
+.goal-button:hover {
+  font-weight: bold;
+}
+
+.edit-goal:hover {
+  color: #d6083f;
+}
+
+.goal-form input {
+  color: black;
+}
+
+.save-goal:hover {
+  color: #2a8e13
+}
+
+.cancel-goal:hover {
+  color: #d6083f;
+}
+
+.error-message {
+  color: #d6083f;
+  font-weight:bold;
+}
+
 
 
 

@@ -27,5 +27,5 @@ Rails.application.routes.draw do
   get '/goals' => 'goals#index'
   get '/goals/new' => 'goals#new'
   post '/goals/new' => 'goals#create'
-  patch 'goals/edit' => 'goals#update'
+  patch 'goals/:id/edit' => 'goals#update'
 end
