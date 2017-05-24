@@ -166,6 +166,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_bills - @bills_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average Bills: <%= number_to_currency(@average_bills) %></h5>
     </div>
     <div class="category-details">
@@ -193,6 +194,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_income - @income_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average income: <%= number_to_currency(@average_income) %></h5>
     </div>
     <div class="category-details">
@@ -219,6 +221,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_groceries - @groceries_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average groceries: <%= number_to_currency(@average_groceries) %></h5>
     </div>
     <div class="category-details">
@@ -245,6 +248,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_intox - @intox_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h5>
     </div>
     <div class="category-details">
@@ -271,6 +275,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_transport - @transport_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average transportation: <%= number_to_currency(@average_transportation) %></h5>
     </div>
     <div class="category-details">
@@ -297,6 +302,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_pets - @pets_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average pets: <%= number_to_currency(@average_pets) %></h5>
     </div>
     <div class="category-details">
@@ -323,6 +329,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_restaurants - @restaurants_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average restaurants: <%= number_to_currency(@average_restaurants) %></h5>
     </div>
     <div class="category-details">
@@ -349,6 +356,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_bme - @bme_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average: <%= number_to_currency(@average_entertainment) %></h5>
     </div>
     <div class="category-details">
@@ -375,6 +383,7 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_misc - @misc_goal) %> over.</h4>
       <% end %>
+      <a href="/goals">View and edit goals</a>
       <h5>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h5>
     </div>
     <div class="category-details">
@@ -401,7 +410,8 @@
       <% else %>
         <h4 class="over-budget"><%= number_to_currency(@total_savings - @savings_goal) %> over.</h4>
       <% end %>
-      <h3>Average savings: <%= number_to_currency(@average_savings) %></h3>
+      <a href="/goals">View and edit goals</a>
+      <h5>Average savings: <%= number_to_currency(@average_savings) %></h5>
     </div>
     <div class="category-details">
       <% @savings.each do |entry| %>
