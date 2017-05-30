@@ -1,5 +1,8 @@
-$(document).ready( function() {
+$(document).on("turbolinks:load", function() {
+  setUpJavascript();
+})
 
+var setUpJavascript = function() {
   // Month scripts 
     var showButtons = document.querySelectorAll('.show-form');
     var hideButton = document.querySelector('.hide-form');
@@ -70,7 +73,7 @@ $(document).ready( function() {
 
   // Import scripts 
 
-  var entry_forms = document.querySelectorAll('.entry-forms')
+  var entry_forms = document.querySelectorAll('.entry-forms');
   if(entry_forms.length > 0) {
     handleEntries(entry_forms);
   }
@@ -182,4 +185,4 @@ function addEntry() {
       goalHolder.querySelector('.edit-goal').classList.remove('hidden');
     }
   }
-})
+}
