@@ -1,7 +1,3 @@
-// $(document).ready( function() {
-//   setUpJavascript();
-// })
-
 $(document).on("turbolinks:load", function() {
   setUpJavascript();
 })
