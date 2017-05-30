@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row text-center">
+    <div class="col-xs-12">
+      <% if @goals.length > 0 %>
+      <h1>Current goals:</h1>
+    </div>
+      <% @goals.each do |goal| %>
+        <div class="col-xs-6">
+          <div class="holder">
+            <span class="hidden goal-id"><%= goal.id %></span>
+            <h2><%= goal.category.name %>:</h2>
+            <h3><span class="goal-button edit-goal"><%= number_to_currency(goal.amount) %></span></h3>
+            <div class="goal-form hidden">
+              <input type="text" class="new-goal" placeholder="<%= goal.amount %>" />
+              <span class="goal-button save-goal">Save</span> <span class="goal-button cancel-goal">Cancel</span>
+            </div>
+            <span class="error-message"></span>
+          </div>
+        </div>
+      <% end %>
+      <% else %>
+        <h1>No goals set.</h1>
+        <h2><%= link_to "Set some?", "/goals/new" %></h2>
+      </div>
+      <% end %>
+  </div>
+</div>

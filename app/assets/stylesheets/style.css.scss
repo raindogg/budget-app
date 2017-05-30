@@ -73,12 +73,6 @@
     flex 0.7s cubic-bezier(0.61,-0.19, 0.7,-0.11);
 }
 
-.category-details {
-  display: none;
-  text-align: left;
-  transition:
-    opacity 0.7s;
-}
 
 .show-details {
   text-align: center;
@@ -92,16 +86,12 @@
 .hide-details {
   text-align: center;
   cursor: pointer;
-  display: none;
 }
 .hide-details:hover {
   font-weight:bold;
   color: #c40707;
 }
 
-.entry-details {
-  margin-bottom: 5px;
-}
 
 .entry-button {
   padding: 5px;
@@ -116,6 +106,90 @@
 .return-link {
   color: white;
   text-decoration: none;
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  display: none;
+}
+
+.catModal {
+  display: none;
+  background-color: white;
+  color: black;
+  border: solid black 5px;
+  margin-top: 10%;
+  width:50%;
+  margin-left: 20%;
+  overflow-y: scroll;
+}
+
+.modalHeader {
+  border-bottom: double 3px;
+}
+
+.modalSubHead {
+  border-bottom: double 3px;
+}
+
+.modalFooter {
+  padding: 10px;
+}
+
+.category-details {
+  text-align: left;
+  border-bottom: double 3px;
+  transition:
+    opacity 0.7s;
+}
+.entry-details {
+  margin-bottom: 5px;
+  padding: 3px; 
+  display: inline-block;
+  width: 30%;
+}
+
+.under-budget {
+  color: green;
+}
+
+.over-budget {
+  color: red;
+}
+
+.goal-button {
+  cursor: pointer;
+}
+
+.goal-button:hover {
+  font-weight: bold;
+}
+
+.edit-goal:hover {
+  color: #d6083f;
+}
+
+.goal-form input {
+  color: black;
+}
+
+.save-goal:hover {
+  color: #2a8e13
+}
+
+.cancel-goal:hover {
+  color: #d6083f;
+}
+
+.error-message {
+  color: #d6083f;
+  font-weight:bold;
 }
 
 

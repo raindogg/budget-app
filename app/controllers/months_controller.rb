@@ -94,6 +94,16 @@ class MonthsController < ApplicationController
     @average_miscellaneous = averages['miscellaneous'].round(2)
     @average_savings = averages['savings'].round(2)
 
+    @bills_goal = Goal.find(1).amount
+    @income_goal = Goal.find(2).amount
+    @groceries_goal = Goal.find(3).amount
+    @intox_goal = Goal.find(4).amount
+    @transport_goal = Goal.find(5).amount
+    @pets_goal = Goal.find(6).amount
+    @restaurants_goal = Goal.find(7).amount
+    @bme_goal = Goal.find(8).amount
+    @misc_goal = Goal.find(9).amount
+    @savings_goal = Goal.find(10).amount
   end
 
   def update
