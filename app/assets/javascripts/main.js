@@ -57,7 +57,7 @@ var setUpJavascript = function() {
   function showDetails() {
     modal.style = "display:block";
     var catModal = document.querySelector("#modal-" + this.dataset.cat);
-    catModal.style = "display:block";
+    catModal.style = "display:block;";
   }
 
   function hideDetails() {
