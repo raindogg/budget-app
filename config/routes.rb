@@ -28,4 +28,8 @@ Rails.application.routes.draw do
   get '/goals/new' => 'goals#new'
   post '/goals/new' => 'goals#create'
   patch 'goals/:id/edit' => 'goals#update'
+
+  # Graph routes 
+  get '/graphs' => 'graphs#index'
+  get 'graphs/:category' => 'graphs#show'
 end
