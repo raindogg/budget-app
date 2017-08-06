@@ -1,2 +1,27 @@
-<%= @values %>
-<%= @months %>
+<div class="container" id="graph-page">
+  <div class="row">
+    <div class="col-xs-12">
+      <h1 class="text-center"><%= @category %> month by month</h1>
+      <div class="details">
+
+      </div>
+      <div class="chart-area">
+        <svg class="chart">
+
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="hidden">
+  <ul class="values">
+<% @values.each do |value| %>
+  <li><%= value %></li>
+<% end %>
+  </ul>
+  <ul class="months">
+<% @months.each do |month| %>
+    <li><%= month %></li>
+<% end %>
+  </ul>
+</div>

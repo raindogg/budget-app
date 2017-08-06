@@ -4,7 +4,8 @@ class GraphsController < ApplicationController
   end
 
   def show
-    category = params[:category].downcase.to_sym
+    @category = params[:category]
+    category = @category.downcase.to_sym
     totals = Total.all
     @values = []
     @months = []
