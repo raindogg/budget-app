@@ -13,7 +13,7 @@ class GraphsController < ApplicationController
     test = Total.find(3).find_total
     @test = test[category]
     totals.each do |total|
-      @months << total.month.name
+      @months << { :name => total.month.name, :year => total.month.year }
       @values << total.find_total[category]
     end
   end

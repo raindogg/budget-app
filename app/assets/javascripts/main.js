@@ -202,8 +202,6 @@ var setUpJavascript = function() {
       values.push(value.innerHTML * 1);
     }); 
 
-    console.log(valueList);
-
     monthList.forEach( month => {
       months.push(month.innerHTML);
     });
@@ -240,9 +238,10 @@ var setUpJavascript = function() {
           .attr("y", function(d) { return y(d); })
           .attr("height", function(d) {return  height - y(d); })
           .attr("width", barWidth)
+          .attr("data-year", function() {return months[monthIndex - 1].year })
           .attr("data-month", function() {
         monthIndex++;
-        return months[monthIndex - 1]})
+        return months[monthIndex - 1].name})
           .attr("data-value", function() { 
         valueIndex++;
         return values[valueIndex - 1]; });
@@ -255,7 +254,18 @@ var setUpJavascript = function() {
       bars.forEach(bar => {
         bar.style.fill = `hsl(${hue}, 100%, 50%)`;
         hue += 30;
+        bar.addEventListener('mouseenter', addHoverStates);
       });
     };
+
+    function addHoverStates() {
+      const details = document.querySelector('.details'),
+            g = this.parentElement,
+            modal = `<div class="modal"><span class="date">`;
+
+      
+
+    }
+
   }
 }

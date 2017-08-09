@@ -21,7 +21,7 @@
   </ul>
   <ul class="months">
 <% @months.each do |month| %>
-    <li><%= month %></li>
+    <li><%= month[:name] %> <%= month[:year] %> </li>
 <% end %>
   </ul>
 </div>
