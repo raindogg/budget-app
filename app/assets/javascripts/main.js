@@ -203,8 +203,9 @@ var setUpJavascript = function() {
     }); 
 
     monthList.forEach( month => {
-      months.push(month.innerHTML);
+      months.push(month.innerHTML.split(' '));
     });
+
 
     if(values.length > 1) {
       chartData();
@@ -238,10 +239,10 @@ var setUpJavascript = function() {
           .attr("y", function(d) { return y(d); })
           .attr("height", function(d) {return  height - y(d); })
           .attr("width", barWidth)
-          .attr("data-year", function() {return months[monthIndex - 1].year })
+          .attr("data-year", function() {return months[monthIndex][1]; })
           .attr("data-month", function() {
         monthIndex++;
-        return months[monthIndex - 1].name})
+        return months[monthIndex - 1][0]})
           .attr("data-value", function() { 
         valueIndex++;
         return values[valueIndex - 1]; });
@@ -254,18 +255,26 @@ var setUpJavascript = function() {
       bars.forEach(bar => {
         bar.style.fill = `hsl(${hue}, 100%, 50%)`;
         hue += 30;
-        bar.addEventListener('mouseenter', addHoverStates);
+        bar.addEventListener('mouseenter', showBarDetails);
+        bar.addEventListener('mouseleave', hideBarDetails);
       });
     };
 
-    function addHoverStates() {
+    function showBarDetails() {
       const details = document.querySelector('.details'),
             g = this.parentElement,
-            modal = `<div class="modal"><span class="date">`;
+            modal = `<div class="detail-modal"><span class="date">${this.dataset.month} ${this.dataset.year}:<br><span class="amount">${numberToCurrency(this.dataset.value)}</span></div>`;
 
-      
-
+      details.innerHTML = modal;
+      details.style.marginLeft = `${g.transform.baseVal[0].matrix.e + this.width.baseVal.value}px`;
     }
 
+    function hideBarDetails() {
+      var modal = document.querySelector('.detail-modal');
+      modal.style.opacity = 0;
+      setTimeout(function() {
+        modal.style.display = 'none';  
+      }, 500);
+    }
   }
 }
