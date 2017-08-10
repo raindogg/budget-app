@@ -224,6 +224,20 @@ var setUpJavascript = function() {
         .domain([0, d3.max(values)])
         .range([height, 0]);
 
+    // var x = d3.scaleLinear()
+    //         .domain([0, values.length])
+    //         .range([0, width])
+
+    // var xAxis = d3.axisBottom()
+    //     .scale(x)
+    //     .tickFormat("")
+    //     .ticks(10);
+
+    // var yAxis = d3.axisLeft()
+    //     .scale(y)
+    //     .tickFormat("")
+    //     .ticks(10);
+
     var chart = d3.select(".chart")
         .attr("width", width)
         .attr("height", height);
@@ -234,6 +248,28 @@ var setUpJavascript = function() {
         .data(values)
       .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ", 0)"; });
+
+    chart.append("g")
+        .attr("class", "x-axis")
+        .attr('width', width)
+        .attr("transform", "translate(0," + height + ")")
+        .style("fill", "black");
+      //   .call(xAxis)
+      // .selectAll("text")
+      //   .style("text-anchor", "end")
+      //   .attr("dx", "-.8em")
+      //   .attr("dy", "-.55em")
+      //   .attr("transform", "rotate(-90)" );
+
+    chart.append("g")
+        .attr("class", "y-axis")
+      //   .call(yAxis)
+      // .append("text")
+      //   .attr("transform", "rotate(-90)")
+      //   .attr("y", 6)
+      //   .attr("dy", ".71em")
+      //   .style("text-anchor", "end")
+      //   .text("Value ($)");
 
       bar.append("rect")
           .attr("y", function(d) { return y(d); })
