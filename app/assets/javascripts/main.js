@@ -216,22 +216,23 @@ var setUpJavascript = function() {
 
     function chartData() {
     var width = 1000,
-        height = 300,
+        height = 350,
         monthIndex = 0,
         valueIndex = 0;
 
     var y = d3.scaleLinear()
         .domain([0, d3.max(values)])
-        .range([height, 0]);
+        .range([(height - 50), 0]);
 
-    // var x = d3.scaleLinear()
-    //         .domain([0, values.length])
-    //         .range([0, width])
+    var x = d3.scaleLinear()
+            .domain([0, values.length])
+            .range([0, width])
 
-    // var xAxis = d3.axisBottom()
-    //     .scale(x)
-    //     .tickFormat("")
-    //     .ticks(10);
+    var xAxis = d3.axisBottom()
+        .scale(x)
+        .ticks(1);
+
+
 
     // var yAxis = d3.axisLeft()
     //     .scale(y)
@@ -252,14 +253,13 @@ var setUpJavascript = function() {
     chart.append("g")
         .attr("class", "x-axis")
         .attr('width', width)
-        .attr("transform", "translate(0," + height + ")")
-        .style("fill", "black");
-      //   .call(xAxis)
-      // .selectAll("text")
-      //   .style("text-anchor", "end")
-      //   .attr("dx", "-.8em")
-      //   .attr("dy", "-.55em")
-      //   .attr("transform", "rotate(-90)" );
+        .attr("transform", "translate(20," + height + ")")
+        .call(xAxis)
+          .selectAll('text')
+          .text("stuff")
+        .style("text-anchor", "center")
+        .attr("dx", "-1em")
+        .attr("dy", "-1em")
 
     chart.append("g")
         .attr("class", "y-axis")
@@ -273,7 +273,7 @@ var setUpJavascript = function() {
 
       bar.append("rect")
           .attr("y", function(d) { return y(d); })
-          .attr("height", function(d) {return  height - y(d); })
+          .attr("height", function(d) {return  (height - 50) - y(d); })
           .attr("width", barWidth)
           .attr("data-year", function() {return months[monthIndex][1]; })
           .attr("data-month", function() {
