@@ -206,7 +206,6 @@ var setUpJavascript = function() {
       months.push(month.innerHTML.split(' '));
     });
 
-
     if(values.length > 1) {
       chartData();
       addColor();
@@ -218,6 +217,8 @@ var setUpJavascript = function() {
     var width = 1000,
         height = 350,
         monthIndex = 0,
+        yearIndex = 0,
+        linkIndex = 0,
         valueIndex = 0;
 
     var y = d3.scaleLinear()
@@ -228,9 +229,9 @@ var setUpJavascript = function() {
             .domain([0, values.length])
             .range([0, width])
 
-    var xAxis = d3.axisBottom()
-        .scale(x)
-        .ticks(1);
+    // var xAxis = d3.axisBottom()
+    //     .scale(x)
+    //     .ticks(1);
 
 
 
@@ -245,43 +246,49 @@ var setUpJavascript = function() {
 
     var barWidth = width / values.length;
 
+
     var bar = chart.selectAll("g")
         .data(values)
       .enter().append("g")
         .attr("transform", function(d, i) { return "translate(" + i * barWidth + ", 0)"; });
 
-    chart.append("g")
-        .attr("class", "x-axis")
-        .attr('width', width)
-        .attr("transform", "translate(20," + height + ")")
-        .call(xAxis)
-          .selectAll('text')
-          .text("stuff")
-        .style("text-anchor", "center")
-        .attr("dx", "-1em")
-        .attr("dy", "-1em")
+    // chart.append("g")
+    //     .attr("class", "x-axis")
+    //     .attr('width', width)
+    //     .attr("transform", "translate(20," + height + ")")
+    //     .call(xAxis)
+    //       .selectAll('text')
+    //       .text("stuff")
+    //     .style("text-anchor", "center")
+    //     .attr("dx", "-1em")
+    //     .attr("dy", "-1em")
 
-    chart.append("g")
-        .attr("class", "y-axis")
-      //   .call(yAxis)
-      // .append("text")
-      //   .attr("transform", "rotate(-90)")
-      //   .attr("y", 6)
-      //   .attr("dy", ".71em")
-      //   .style("text-anchor", "end")
-      //   .text("Value ($)");
+    // chart.append("g")
+    //     .attr("class", "y-axis")
+    //   //   .call(yAxis)
+    //   // .append("text")
+    //   //   .attr("transform", "rotate(-90)")
+    //   //   .attr("y", 6)
+    //   //   .attr("dy", ".71em")
+    //   //   .style("text-anchor", "end")
+    //   //   .text("Value ($)");
 
       bar.append("rect")
           .attr("y", function(d) { return y(d); })
-          .attr("height", function(d) {return  (height - 50) - y(d); })
+          .attr("height", function(d) {return  height - y(d); })
           .attr("width", barWidth)
-          .attr("data-year", function() {return months[monthIndex][1]; })
           .attr("data-month", function() {
-        monthIndex++;
-        return months[monthIndex - 1][0]})
+            monthIndex++;
+            return months[monthIndex - 1][0]; })
+          .attr("data-year", function() {
+            yearIndex++;
+            return months[yearIndex - 1][1]; })
+          .attr("data-link", function() {
+            linkIndex++;
+            return "/months/" + months[linkIndex - 1][2]; })
           .attr("data-value", function() { 
-        valueIndex++;
-        return values[valueIndex - 1]; });
+            valueIndex++;
+            return values[valueIndex - 1]; });
     }
 
     function addColor() {
@@ -293,13 +300,16 @@ var setUpJavascript = function() {
         hue += 30;
         bar.addEventListener('mouseenter', showBarDetails);
         bar.addEventListener('mouseleave', hideBarDetails);
+        bar.addEventListener('click', goToMonth);
       });
     };
 
     function showBarDetails() {
       const details = document.querySelector('.details'),
             g = this.parentElement,
-            modal = `<div class="detail-modal"><span class="date">${this.dataset.month} ${this.dataset.year}:<br><span class="amount">${numberToCurrency(this.dataset.value)}</span></div>`;
+            goal = document.getElementById('goal').innerHTML,
+            status = (goal * 1) >= (this.dataset.value * 1) ? 'under' : 'over'
+            modal = `<div class="detail-modal"><span class="date">${this.dataset.month} ${this.dataset.year}:<br><span class="amount ${status}">${numberToCurrency(this.dataset.value)}</span></div>`;
 
       details.innerHTML = modal;
       details.style.marginLeft = `${g.transform.baseVal[0].matrix.e + this.width.baseVal.value}px`;
@@ -312,5 +322,10 @@ var setUpJavascript = function() {
         modal.style.display = 'none';  
       }, 500);
     }
+
+    function goToMonth() {
+      window.location = `${this.dataset.link}`;
+    }
+
   }
 }

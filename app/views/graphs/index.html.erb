@@ -7,11 +7,7 @@
       <h2>See your habits in:</h2>
       <ul>
         <% @categories.each do |category| %>
-          <% if category.name == "Bars, Movies, Entertainment" %>
-            <li><a href="graphs/entertainment">Bars, Movies, Entertainment</a></li>
-          <% else %>
-            <li><a href="graphs/<%= category.name %>"><%= category.name %></a></li>
-          <% end %>
+          <li><a href="graphs/<%= category.id %>"><%= category.name %></a></li>
         <% end %>
       </ul>
     </div>

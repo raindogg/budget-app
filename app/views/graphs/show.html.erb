@@ -1,7 +1,10 @@
 <div class="container" id="graph-page">
   <div class="row">
     <div class="col-xs-12">
-      <h1 class="text-center"><%= @category %> month by month</h1>
+      <div class="info text-center">
+        <h1><%= @category.name %> month by month</h1>
+        <h2>Spending goal: <%= number_to_currency(@goal) %></h2>
+      </div>
       <div class="details">
       </div>
       <div class="chart-area">
@@ -20,7 +23,8 @@
   </ul>
   <ul class="months">
 <% @months.each do |month| %>
-    <li><%= month[:name] %> <%= month[:year] %></li>
+    <li><%= month[:name] %> <%= month[:year] %> <%= month[:id] %></li>
 <% end %>
   </ul>
+  <p id="goal"><%= @goal %></p>
 </div>

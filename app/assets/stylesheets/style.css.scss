@@ -200,7 +200,7 @@
   margin-top: 60px;
 }
 
-#graph-page h1 {
+#graph-page .info {
   margin-bottom: 10%;
 }
 .chart-area {
@@ -223,8 +223,21 @@
   border-radius: 5%;
 }
 
+
+.chart rect {
+  cursor: pointer;
+}
+
 .chart rect:hover {
   opacity: .2;
+}
+
+#graph-page .under {
+  color: green;
+}
+
+#graph-page .over {
+  color: red;
 }
 
 

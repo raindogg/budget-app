@@ -29,17 +29,18 @@ class Total < ApplicationRecord
     averages
   end
 
-  def find_total
-    values = {}
-    values[:bills] = bills
-    values[:income] = income
-    values[:groceries] = groceries
-    values[:intoxicants] = intoxicants
-    values[:pets] = pets
-    values[:restaurants] = restaurants
-    values[:entertainment] = entertainment
-    values[:miscellaneous] = misc
-    values[:savings] = savings
-    values
+  def find_total(id)
+    values = { '1' => bills,
+               '2' => income,
+               '3' => groceries,
+               '4' => intoxicants,
+               '5' => transportation,
+               '6' => pets,
+               '7' => restaurants,
+               '8' => entertainment,
+               '9' => misc,
+               '10' => savings }
+
+    values[id.to_s]
   end
 end

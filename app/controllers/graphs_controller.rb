@@ -4,18 +4,18 @@ class GraphsController < ApplicationController
   end
 
   def show
-    @category = params[:category]
-    category = @category.downcase.to_sym
-    puts category
+    @category = Category.find(params[:category])
+    id = @category.id.to_s
     totals = Total.all
     @values = []
     @months = []
+    @goal = @category.goal.amount
 
-    test = Total.find(3).find_total
-    @test = test[category]
     totals.each do |total|
-      @months << { :name => total.month.name, :year => total.month.year }
-      @values << total.find_total[category]
+      @months << { name: total.month.name,
+                   year: total.month.year,
+                   id: total.month.id }
+      @values << total.find_total(id)
     end
   end
 end
