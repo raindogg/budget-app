@@ -200,4 +200,44 @@
   margin-top: 60px;
 }
 
+#graph-page .info {
+  margin-bottom: 10%;
+}
+.chart-area {
+  width: 1000px;
+  margin: auto;
+  padding: 5px;
+}
+
+.details {
+  z-index: 3;
+  position: absolute;
+  display: block;
+}
+
+.detail-modal {
+  border: solid;
+  padding: 10px;
+  background-color: white;
+  transition: opacity .5s ease-in-out;
+  border-radius: 5%;
+}
+
+
+.chart rect {
+  cursor: pointer;
+}
+
+.chart rect:hover {
+  opacity: .2;
+}
+
+#graph-page .under {
+  color: green;
+}
+
+#graph-page .over {
+  color: red;
+}
+
 

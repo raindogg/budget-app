@@ -1,22 +1,26 @@
 $(document).on("turbolinks:load", function() {
   setUpJavascript();
-})
+});
 
 var setUpJavascript = function() {
   // Month scripts 
-    var showButtons = document.querySelectorAll('.show-form');
-    var hideButton = document.querySelector('.hide-form');
-    var allForms = document.querySelectorAll('.entry-form');
-    var input = document.querySelector('.input-file');
-    var detailButtons = document.querySelectorAll('.show-details');
-    var hideDetailsButtons = document.querySelectorAll('.hide-details');
-    var modal = document.querySelector("#modal");
-    var location = window.location.pathname;
+    var showButtons = document.querySelectorAll('.show-form'),
+        hideButton = document.querySelector('.hide-form'),
+        allForms = document.querySelectorAll('.entry-form'),
+        input = document.querySelector('.input-file'),
+        detailButtons = document.querySelectorAll('.show-details'),
+        hideDetailsButtons = document.querySelectorAll('.hide-details'),
+        modal = document.querySelector("#modal"),
+        graphPage = document.getElementById('graph-page'),
+        location = window.location.pathname;
 
     if(location.match(/months\/\d/g) != null){
       setUpDisplay();
     }
 
+    if(graphPage) {
+      graphs();
+    }
 
   function setUpDisplay() {
     showButtons.forEach(function(button) {
@@ -78,33 +82,34 @@ var setUpJavascript = function() {
     handleEntries(entry_forms);
   }
 
-function addEntry() {
-  var entry = this.parentNode.parentNode;
-  var name = entry.querySelector('input#name').value;
-  var amount = entry.querySelector('input#amount').value;
-  var category = entry.querySelector('select.categories').value;
-  var month = entry.querySelector('input#month_id').value;
 
-  $.ajax({
-    type: "POST",
-    contentType: "application/json; charset=utf-8",
-    url: "/entries_bulk",
-    dataType: "json",
-    data: JSON.stringify({name: name, amount: amount, category_id: category, month_id: month}),
-    success: function (result) {
-      console.log("Success!");
-      entry.innerHTML = "Saved!";
-      entry.parentNode.style = "opacity:0";
-      setTimeout(function() {
-        entry.parentNode.style = "display:none";
-      }, 1500);
+  function addEntry() {
+    var entry = this.parentNode.parentNode;
+    var name = entry.querySelector('input#name').value;
+    var amount = entry.querySelector('input#amount').value;
+    var category = entry.querySelector('select.categories').value;
+    var month = entry.querySelector('input#month_id').value;
 
-    },
-    error: function() {
-      console.log("You fucked up");
-    }
-  });
-}
+    $.ajax({
+      type: "POST",
+      contentType: "application/json; charset=utf-8",
+      url: "/entries_bulk",
+      dataType: "json",
+      data: JSON.stringify({name: name, amount: amount, category_id: category, month_id: month}),
+      success: function (result) {
+        console.log("Success!");
+        entry.innerHTML = "Saved!";
+        entry.parentNode.style = "opacity:0";
+        setTimeout(function() {
+          entry.parentNode.style = "display:none";
+        }, 1500);
+
+      },
+      error: function() {
+        console.log("You fucked up");
+      }
+    });
+  }
   function deleteEntry() {
     var entryForm = this.parentNode.parentNode.parentNode;
     entryForm.style = "opacity:0";
@@ -119,7 +124,7 @@ function addEntry() {
       var close = entry.querySelector('.delete-entry');
       submit.addEventListener('click', addEntry);
       close.addEventListener('click', deleteEntry);
-    })
+    });
   }
 
   // Goal scripts 
@@ -184,5 +189,143 @@ function addEntry() {
       var goalHolder = this.parentElement.parentElement;
       goalHolder.querySelector('.edit-goal').classList.remove('hidden');
     }
+  }
+
+  function graphs() {
+    const valueList = document.querySelectorAll('.values li'),
+          monthList = document.querySelectorAll('.months li');
+
+    var values = [],
+        months = [];
+
+    valueList.forEach( value => {
+      values.push(value.innerHTML * 1);
+    }); 
+
+    monthList.forEach( month => {
+      months.push(month.innerHTML.split(' '));
+    });
+
+    if(values.length > 1) {
+      chartData();
+      addColor();
+    } else {
+      console.log("No data motha fucka");
+    }
+
+    function chartData() {
+    var width = 1000,
+        height = 350,
+        monthIndex = 0,
+        yearIndex = 0,
+        linkIndex = 0,
+        valueIndex = 0;
+
+    var y = d3.scaleLinear()
+        .domain([0, d3.max(values)])
+        .range([(height - 50), 0]);
+
+    var x = d3.scaleLinear()
+            .domain([0, values.length])
+            .range([0, width])
+
+    // var xAxis = d3.axisBottom()
+    //     .scale(x)
+    //     .ticks(1);
+
+
+
+    // var yAxis = d3.axisLeft()
+    //     .scale(y)
+    //     .tickFormat("")
+    //     .ticks(10);
+
+    var chart = d3.select(".chart")
+        .attr("width", width)
+        .attr("height", height);
+
+    var barWidth = width / values.length;
+
+
+    var bar = chart.selectAll("g")
+        .data(values)
+      .enter().append("g")
+        .attr("transform", function(d, i) { return "translate(" + i * barWidth + ", 0)"; });
+
+    // chart.append("g")
+    //     .attr("class", "x-axis")
+    //     .attr('width', width)
+    //     .attr("transform", "translate(20," + height + ")")
+    //     .call(xAxis)
+    //       .selectAll('text')
+    //       .text("stuff")
+    //     .style("text-anchor", "center")
+    //     .attr("dx", "-1em")
+    //     .attr("dy", "-1em")
+
+    // chart.append("g")
+    //     .attr("class", "y-axis")
+    //   //   .call(yAxis)
+    //   // .append("text")
+    //   //   .attr("transform", "rotate(-90)")
+    //   //   .attr("y", 6)
+    //   //   .attr("dy", ".71em")
+    //   //   .style("text-anchor", "end")
+    //   //   .text("Value ($)");
+
+      bar.append("rect")
+          .attr("y", function(d) { return y(d); })
+          .attr("height", function(d) {return  height - y(d); })
+          .attr("width", barWidth)
+          .attr("data-month", function() {
+            monthIndex++;
+            return months[monthIndex - 1][0]; })
+          .attr("data-year", function() {
+            yearIndex++;
+            return months[yearIndex - 1][1]; })
+          .attr("data-link", function() {
+            linkIndex++;
+            return "/months/" + months[linkIndex - 1][2]; })
+          .attr("data-value", function() { 
+            valueIndex++;
+            return values[valueIndex - 1]; });
+    }
+
+    function addColor() {
+      const bars = document.querySelectorAll('.chart rect');
+      var hue = 0;
+
+      bars.forEach(bar => {
+        bar.style.fill = `hsl(${hue}, 100%, 50%)`;
+        hue += 30;
+        bar.addEventListener('mouseenter', showBarDetails);
+        bar.addEventListener('mouseleave', hideBarDetails);
+        bar.addEventListener('click', goToMonth);
+      });
+    };
+
+    function showBarDetails() {
+      const details = document.querySelector('.details'),
+            g = this.parentElement,
+            goal = document.getElementById('goal').innerHTML,
+            status = (goal * 1) >= (this.dataset.value * 1) ? 'under' : 'over'
+            modal = `<div class="detail-modal"><span class="date">${this.dataset.month} ${this.dataset.year}:<br><span class="amount ${status}">${numberToCurrency(this.dataset.value)}</span></div>`;
+
+      details.innerHTML = modal;
+      details.style.marginLeft = `${g.transform.baseVal[0].matrix.e + this.width.baseVal.value}px`;
+    }
+
+    function hideBarDetails() {
+      var modal = document.querySelector('.detail-modal');
+      modal.style.opacity = 0;
+      setTimeout(function() {
+        modal.style.display = 'none';  
+      }, 500);
+    }
+
+    function goToMonth() {
+      window.location = `${this.dataset.link}`;
+    }
+
   }
 }

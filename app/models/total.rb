@@ -28,4 +28,19 @@ class Total < ApplicationRecord
     averages.each { |key, value| averages[key] = value / Month.all.length }
     averages
   end
+
+  def find_total(id)
+    values = { '1' => bills,
+               '2' => income,
+               '3' => groceries,
+               '4' => intoxicants,
+               '5' => transportation,
+               '6' => pets,
+               '7' => restaurants,
+               '8' => entertainment,
+               '9' => misc,
+               '10' => savings }
+
+    values[id.to_s]
+  end
 end

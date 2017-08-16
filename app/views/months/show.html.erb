@@ -168,6 +168,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average Bills: <%= number_to_currency(@average_bills) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/1" %></h5>
     </div>
     <div class="category-details">
       <% @bills.each do |bill| %>
@@ -196,6 +197,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average income: <%= number_to_currency(@average_income) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/2" %></h5>
     </div>
     <div class="category-details">
       <% @income.each do |entry| %>
@@ -223,6 +225,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average groceries: <%= number_to_currency(@average_groceries) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/3" %></h5>
     </div>
     <div class="category-details">
       <% @groceries.each do |grocery| %>
@@ -250,6 +253,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average intoxicants: <%= number_to_currency(@average_intoxicants) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/4" %></h5>
     </div>
     <div class="category-details">
       <% @intox.each do |entry| %>
@@ -277,6 +281,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average transportation: <%= number_to_currency(@average_transportation) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/5" %></h5>
     </div>
     <div class="category-details">
       <% @transport.each do |entry| %>
@@ -304,6 +309,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average pets: <%= number_to_currency(@average_pets) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/6" %></h5>
     </div>
     <div class="category-details">
       <% @pets.each do |entry| %>
@@ -331,6 +337,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average restaurants: <%= number_to_currency(@average_restaurants) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/7" %></h5>
     </div>
     <div class="category-details">
       <% @restaurants.each do |entry| %>
@@ -358,6 +365,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average: <%= number_to_currency(@average_entertainment) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/8" %></h5>
     </div>
     <div class="category-details">
       <% @bme.each do |entry| %>
@@ -385,6 +393,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average miscellaneous: <%= number_to_currency(@average_miscellaneous) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/9" %></h5>
     </div>
     <div class="category-details">
       <% @misc.each do |entry| %>
@@ -412,6 +421,7 @@
       <% end %>
       <a href="/goals">View and edit goals</a>
       <h5>Average savings: <%= number_to_currency(@average_savings) %></h5>
+      <h5><%= link_to "Compare your spending month by month", "/graphs/10" %></h5>
     </div>
     <div class="category-details">
       <% @savings.each do |entry| %>
