@@ -296,7 +296,7 @@ var setUpJavascript = function() {
       var hue = 0;
 
       bars.forEach(function(bar) {
-        bar.style.fill = `hsl(${hue}, 100%, 50%)`;
+        bar.style.fill = 'hsl(' + hue + ', 100%, 50%)';
         hue += 30;
         bar.addEventListener('mouseenter', showBarDetails);
         bar.addEventListener('mouseleave', hideBarDetails);
