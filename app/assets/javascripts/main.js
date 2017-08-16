@@ -198,11 +198,11 @@ var setUpJavascript = function() {
     var values = [],
         months = [];
 
-    valueList.forEach( value => {
+    valueList.forEach(function(value) {
       values.push(value.innerHTML * 1);
     }); 
 
-    monthList.forEach( month => {
+    monthList.forEach(function(month) {
       months.push(month.innerHTML.split(' '));
     });
 
@@ -295,7 +295,7 @@ var setUpJavascript = function() {
       const bars = document.querySelectorAll('.chart rect');
       var hue = 0;
 
-      bars.forEach(bar => {
+      bars.forEach(function(bar) {
         bar.style.fill = `hsl(${hue}, 100%, 50%)`;
         hue += 30;
         bar.addEventListener('mouseenter', showBarDetails);
@@ -309,10 +309,10 @@ var setUpJavascript = function() {
             g = this.parentElement,
             goal = document.getElementById('goal').innerHTML,
             status = (goal * 1) >= (this.dataset.value * 1) ? 'under' : 'over'
-            modal = `<div class="detail-modal"><span class="date">${this.dataset.month} ${this.dataset.year}:<br><span class="amount ${status}">${numberToCurrency(this.dataset.value)}</span></div>`;
+            modal = '<div class="detail-modal"><span class="date">' + this.dataset.month + ' ' + this.dataset.year + ':<br><span class="amount ' + status + '">' + numberToCurrency(this.dataset.value) + '</span></div>';
 
       details.innerHTML = modal;
-      details.style.marginLeft = `${g.transform.baseVal[0].matrix.e + this.width.baseVal.value}px`;
+      details.style.marginLeft = (g.transform.baseVal[0].matrix.e + this.width.baseVal.value) + 'px';
     }
 
     function hideBarDetails() {
@@ -324,7 +324,7 @@ var setUpJavascript = function() {
     }
 
     function goToMonth() {
-      window.location = `${this.dataset.link}`;
+      window.location = this.dataset.link;
     }
 
   }
